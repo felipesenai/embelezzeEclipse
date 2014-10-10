@@ -1,0 +1,142 @@
+body {
+	background-image: url("../img/fundo.jpg");
+	background-repeat: no-repeat;
+}
+
+#carousel-example-generic {
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 30px;
+}
+
+#carousel-example-generic img {
+	height: 80%;
+	width: 100%;
+}	
+
+.page-header {
+	width: 100%;	
+}
+
+.header {
+	text-align: left;
+	width: 90%;
+	margin-left: 35%;
+} 
+
+.header small {
+	color: white;
+}
+
+.painel {
+	margin-left:20%;
+}
+
+.corpo{
+	margin-top:30px;
+}
+
+.corpo p {
+	text-indent:20px;
+}
+
+.container_empresa {
+	width: 100%;
+	height: 550px;
+	background-color: #FFFFFF; /* BRANCO */
+	box-shadow: 2px 2px 20px #888;	
+	padding-left: 30px;
+	float: left;
+	margin-bottom: 5%;
+}
+
+.container_empresa p {	
+	text-align: justify;
+}
+
+.container_descricao_empresa {
+	width: 55%;
+	text-align: center;
+	color:  #333333; /*Cinza escuro*/
+	padding: 10px 10px 10px 10px;
+
+}
+
+.container_descricao_empresa h3 {
+    text-align: left;
+	font-weight: bold;
+	font-size: 25px;
+	color: #000000; /* Preto */
+}
+
+.container_descricao_empresa h4 {
+	margin-right: 94%;
+	font-weight: bold;
+	color: #000000; /* Preto */
+	float: left;
+}
+
+.imagem_empresa {
+	float: right;
+	margin-top: 20px;
+	padding-top: 30px;
+	padding-right: 30px;
+}
+
+.container_contato {
+	width: 100%;
+	height: 500px;
+	background-color: #FFFFFF; /* BRANCO */
+	box-shadow: 2px 2px 20px #888;	
+	padding-top: 40px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 30px;
+	float: left;
+	margin-bottom: 5%;
+}
+
+.mapa {
+	margin-left: 52%;
+	float: left;
+}
+
+.formulario {
+	
+}
+
+.form-group textarea{
+	width: 45%;
+}
+
+.form-group input{
+	width: 45%;
+}
+
+.container_localizacao {
+	width: 100%;
+	height: 640px;
+	background-color: #FFFFFF; /* BRANCO */
+	box-shadow: 2px 2px 20px #888;	
+	padding: 0 20 30 20;
+	float: left;
+}
+
+.contato{
+    margin-left:130px;
+}
+
+.container img {
+	width: 100%;
+	height: 70%;
+}
+
+.rodape{
+	text-align: center;
+	margin-top: 55%;
+}
+
+.rodape p {
+	text-decoration: none;
+}
+
