@@ -28,6 +28,11 @@ body {
 	color: white;
 }
 
+.logo {
+	width: 30%;
+	margin-bottom: 15px; 		
+}
+
 .painel {
 	margin-left:20%;
 }
@@ -42,7 +47,7 @@ body {
 
 .container_empresa {
 	width: 100%;
-	height: 550px;
+	height: 600px;
 	background-color: #FFFFFF; /* BRANCO */
 	box-shadow: 2px 2px 20px #888;	
 	padding-left: 30px;
@@ -106,11 +111,12 @@ body {
 }
 
 .form-group textarea{
-	width: 45%;
+	width: 75%;
 }
 
+
 .form-group input{
-	width: 45%;
+	width: 65%;
 }
 
 .container_localizacao {
@@ -118,8 +124,10 @@ body {
 	height: 640px;
 	background-color: #FFFFFF; /* BRANCO */
 	box-shadow: 2px 2px 20px #888;	
-	padding: 0 20 30 20;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	float: left;
+	margin-bottom: 5%;
 }
 
 .contato{

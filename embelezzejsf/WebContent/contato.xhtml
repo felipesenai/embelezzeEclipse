@@ -11,16 +11,17 @@
 
 		<div class="corpo">
 			<div class="container_contato">
-				<div class="col-md-7">
+				<div class="col-md-6">
 					<form role="form">
 						<div class="form-group">
-							<h:outputLabel value="Nome:" />
-							<input type="text" class="form-control" id="exampleInputNome"
+						
+						<h:outputLabel value="Nome:" />
+							<h:inputText value="#{contatoMb.nome}" type="text" class="form-control"
 								placeholder="Digite seu nome" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel value="Email:" />
-							<input type="email" class="form-control" id="exampleInputEmail1"
+							<h:inputText value="#{contatoMb.email}" type="email" class="form-control"
 								placeholder="Digite seu e-mail" />
 						</div>
 						<div class="form-group">
@@ -28,13 +29,14 @@
 							<h:inputTextarea value="#{contatoMb.mensagem}"
 								styleClass="form-control" />
 						</div>
-						<button type="submit" class="btn btn-default">Enviar</button>
+						<h:commandButton action="#{contatoMb.enviar}" styleClass="btn btn-default" value="Enviar" />
 					</form>
 				</div>	
-				<div class="col-md-5">
-					<iframe
+				<div class="col-md-6">
+					<img src="#{resource['img/contato.jpg']}" alt="Entre em contato conosco" />
+					<!-- <iframe
 						src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3538.7533320000766!2d-48.51326781271227!3d-27.5080458114384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1409101607972"
-						width="100%" height="350" frameborder="10" style="border: 0"></iframe>
+						width="100%" height="350" frameborder="10" style="border: 0"></iframe> -->
 				</div>
 			</div>
 		</div>
