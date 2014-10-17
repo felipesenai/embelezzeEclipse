@@ -29,10 +29,12 @@ public class ContatoMb {
 		this.mensagem = mensagem;
 	}
 	
-	public void enviar(){
+	public String enviar(){
 		System.out.println("Nome: " + nome);
 		System.out.println("Email: " + email);
 		System.out.println("Mensagem: " + mensagem);
+		
+		return "";
 	}
 	
 }

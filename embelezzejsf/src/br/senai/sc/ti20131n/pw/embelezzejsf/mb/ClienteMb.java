@@ -1,20 +1,19 @@
-package br.senai.sc.ti20131n.pw.embelezzejsf.entity;
+package br.senai.sc.ti20131n.pw.embelezzejsf.mb;
 
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
-@Entity
-public class Cliente {
-	
-	@Id
-	@GeneratedValue
+import javax.faces.bean.ManagedBean;
+import javax.persistence.Query;
+
+import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
+import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
+
+@ManagedBean
+public class ClienteMb {
+
+	private List<Cliente> listaClientes;
 	private Long ID;
-	@Column(length=30, nullable=false)
-	private String Nome;
-	@Column(length=14, nullable=false,unique=true)
+	private String nome;
 	private String CPF;
 	private String rua;
 	private Integer numero;
@@ -26,77 +25,132 @@ public class Cliente {
 	private String telefone;
 	private String celular;
 	
+	public List<Cliente> getListaClientes() {
+		if(listaClientes == null){
+			Query query = Util.getEntityManager().createNativeQuery("From Cliente", Cliente.class);
+			listaClientes = query.getResultList();
+		}
+		return listaClientes;
+	}
+	
+	public void setListaClientes(List<Cliente> listaClientes) {
+		this.listaClientes = listaClientes;
+	}
+	
 	public Long getID() {
 		return ID;
 	}
+	
 	public void setID(Long iD) {
-		this.ID = iD;
+		ID = iD;
 	}
+	
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
+	
 	public void setNome(String nome) {
-		this.Nome = nome;
+		this.nome = nome;
 	}
+	
 	public String getCPF() {
 		return CPF;
 	}
+	
 	public void setCPF(String CPF) {
 		this.CPF = CPF;
 	}
+	
 	public String getRua() {
 		return rua;
 	}
+	
 	public void setRua(String rua) {
 		this.rua = rua;
 	}
+	
 	public Integer getNumero() {
 		return numero;
 	}
+	
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
+	
 	public String getBairro() {
 		return bairro;
 	}
+	
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
+	
 	public String getCEP() {
 		return CEP;
 	}
+	
 	public void setCEP(String CEP) {
 		this.CEP = CEP;
 	}
+	
 	public String getCidade() {
 		return cidade;
 	}
+	
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
+	
 	public String getUF() {
 		return UF;
 	}
+	
 	public void setUF(String UF) {
 		this.UF = UF;
-	}
-	public String getTelefone() {
-		return telefone;
 	}
 	
 	public String getEmail() {
 		return email;
 	}
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getTelefone() {
+		return telefone;
+	}
+	
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+	
 	public String getCelular() {
 		return celular;
 	}
+	
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+	
+	public String salvar(){
+		System.out.println("Salvou!");
+		Cliente cliente = new Cliente();
+		
+		cliente.setNome(nome);
+		cliente.setCPF(CPF);
+		cliente.setRua(rua);
+		cliente.setNumero(numero);
+		cliente.setBairro(bairro);
+		cliente.setCEP(CEP);
+		cliente.setCidade(cidade);
+		cliente.setUF(UF);
+		cliente.setEmail(email);
+		cliente.setTelefone(telefone);
+		cliente.setCelular(celular);
+
+		Util.getEntityManager().persist(cliente);
+		return "";
+		
 	}
 }

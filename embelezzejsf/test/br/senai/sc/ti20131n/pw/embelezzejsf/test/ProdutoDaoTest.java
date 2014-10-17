@@ -2,17 +2,29 @@ package br.senai.sc.ti20131n.pw.embelezzejsf.test;
 
 import static org.junit.Assert.assertTrue;
 
+import java.sql.Date;
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
+import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ClienteDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ProdutoDao;
+import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Produto;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
+
 
 public class ProdutoDaoTest {
 
@@ -45,7 +57,7 @@ public class ProdutoDaoTest {
 	}
 	
 	@Test
-	public void testSalvar(){
+	public void testSalvarProduto(){
 		Produto produto = new Produto();
 		produto.setNomeProduto("Prada");
 		produto.setMarcaProduto("Luna Rossa");;
@@ -54,43 +66,37 @@ public class ProdutoDaoTest {
 		assertTrue(dao.salvar(produto));
 	}	
 
-//	@Test
-//	public void excluirPacote1(){
-//		testSalvar();
-//		dao.excluirPacotePorId(1L);
-//		assertNull(dao.buscarPorId(1L));
-//	}
-//	
-//	@Test
-//	public void buscarPacotePorId(){		
-//		Pacote pacote= dao.buscarPorId(1L);
-//		assertNotNull(pacote);
-//	}
-//	
-//	@Test
-//	public void ListarTodos(){
-//		int total = 10;
-//		
-//		for(int i = 0; i < total; i++);
-//			testSalvar();	
-//		
-//		List<Pacote> bandas = dao.listarTodos();
-//		assertEquals(10, bandas.size());
-//	}
-//	
-//	@Test
-//	public void editarPacote(){
-//		testSalvar();		
-//		Pacote pacote = new Pacote();
-//		pacote.setNome("Pacote  de Luxo");
-//		pacote.setEntrada(12);
-//		pacote.setSaida(20);
-//		pacote.setData(SimpleDateFormat.);
-//		pacote.setGenero("Luxo");
-//		pacote.setValor(150);	
-//		dao.atualizar(pacote);
-//		
-//		
-//	}
+	@Test
+	public void verificaSeOProdutoFoiRealmenteDeletado() {
+		Produto produtoDeletado = dao.buscarPorId(1L);
+		entityManager.getTransaction().begin();
+		dao.excluirProdutoPorId(produtoDeletado.getIdProduto());
+		entityManager.getTransaction().commit();
+		Assert.assertEquals(null, dao.buscarPorId(1L));
+	}
+	
+	@Test
+	public void buscarPorId(){
+		Produto produto = dao.buscarPorId(1L);
+		Assert.assertNotNull(produto);
+	}
+	
+	@Test
+	public void atualizaCliente() {
+		Produto produtoEditado = dao.buscarPorId(1L);
+		produtoEditado.setNomeProduto("Teste Alteração");
+		produtoEditado.setMarcaProduto("Teste alteração marca");
+		produtoEditado.setPrecoProduto(0.00);
+		
+		entityManager.getTransaction().begin();
+		dao.atualizar(produtoEditado);
+		entityManager.getTransaction().commit();
+
+		Produto produto = dao.buscarPorId(1L);
+		Assert.assertEquals(produtoEditado.getNomeProduto(), produto.getNomeProduto());
+		Assert.assertEquals(produtoEditado.getMarcaProduto(), produto.getMarcaProduto());
+		Assert.assertEquals(produtoEditado.getPrecoProduto(), produto.getPrecoProduto());
+		
+	}
 	
 }
