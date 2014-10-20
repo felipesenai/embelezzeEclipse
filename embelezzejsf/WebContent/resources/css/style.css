@@ -1,6 +1,7 @@
 body {
-	background-image: url("#{resource['img/fundo.png']}");
-	background-repeat: no-repeat;
+	background-image: url("#{resource['img/fundo_teste.png']}");
+	background-repeat: repeat;
+	height: 100%;
 }
 
 #carousel-example-generic {
