@@ -11,74 +11,105 @@
 
 		<div class="corpo">
 			<div class="container_cadClientes">
-				<h1>Cadastro 
-					<small>Clientes</small>
-				</h1><br/>
-				<div class="col-md-6">
+				<h1>
+					Cadastro <small>Clientes</small>
+				</h1>
+				<br />
+				<div class="col-md-12">
 					<h:form role="form">
-						<div class="form-group">
-						<h:outputLabel value="Nome:" />
-							<h:inputText id="NomeCliente" value="#{clienteMb.nome}" type="text" class="form-control"
-								placeholder="Nome" />
+						<div class="cadClientes1">
+							<div class="form-group">
+								<h:outputLabel value="Nome:" />
+								<h:inputText id="NomeCliente" value="#{clienteMb.nome}"
+									type="text" class="form-control" placeholder="Nome" />
+							</div>
+
+							<div class="form-group">
+								<h:outputLabel value="E-mail:" />
+								<h:inputText value="#{clienteMb.email}" type="email"
+									class="form-control" placeholder="Email" />
+							</div>
+
+							<div class="form-group">
+								<h:outputLabel value="CPF:" />
+								<h:inputText value="#{clienteMb.CPF}" type="text"
+									class="form-control" placeholder="CPF" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel value="Telefone:" />
+								<h:inputText value="#{clienteMb.telefone}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel value="Celular:" />
+								<h:inputText value="#{clienteMb.celular}"
+									styleClass="form-control" />
+							</div>
+
+							<div class="form-group">
+								<h:outputLabel value="Rua:" />
+								<h:inputText value="#{clienteMb.rua}" styleClass="form-control" />
+							</div>
+
 						</div>
-						
-						<div class="form-group">
-						<h:outputLabel value="E-mail:" />
-							<h:inputText value="#{clienteMb.email}" type="email" class="form-control"
-								placeholder="Email" />
+						<div class="cadClientes2">
+							<div class="form-group">
+								<h:outputLabel value="Numero:" />
+								<h:inputText value="#{clienteMb.numero}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel value="Bairro:" />
+								<h:inputText value="#{clienteMb.bairro}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel value="CEP:" />
+								<h:inputText value="#{clienteMb.CEP}" styleClass="form-control" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel value="Cidade:" />
+								<h:inputText value="#{clienteMb.cidade}"
+									styleClass="form-control" />
+							</div>
+							<div class="form-group" id="combobox">
+							<h:selectOneMenu value="#{clienteMb.UF}" styleClass="form-control">
+								<f:selectItem itemValue="1" itemLabel="Alagoas" />
+								<f:selectItem itemValue="2" itemLabel="Acre" />
+								<f:selectItem itemValue="3" itemLabel="Amazonas" />
+								<f:selectItem itemValue="4" itemLabel="Amapá" />
+								<f:selectItem itemValue="5" itemLabel="Bahia" />
+								<f:selectItem itemValue="6" itemLabel="Ceará" />
+								<f:selectItem itemValue="7" itemLabel="Distrito Federal" />
+								<f:selectItem itemValue="8" itemLabel="Espirito Santo" />
+								<f:selectItem itemValue="9" itemLabel="Goiás" />
+								<f:selectItem itemValue="10" itemLabel="Maranhão" />
+								<f:selectItem itemValue="11" itemLabel="Mato Grosso" />
+								<f:selectItem itemValue="12" itemLabel="Mato Grosso do Sul" />
+								<f:selectItem itemValue="13" itemLabel="Minas Gerais" />
+								<f:selectItem itemValue="14" itemLabel="Pará" />
+								<f:selectItem itemValue="15" itemLabel="Paraíba" />
+								<f:selectItem itemValue="16" itemLabel="Paraná" />
+								<f:selectItem itemValue="17" itemLabel="Pernambuco" />
+								<f:selectItem itemValue="18" itemLabel="Piauí" />
+								<f:selectItem itemValue="19" itemLabel="Rio de Janeiro" />
+								<f:selectItem itemValue="20" itemLabel="Rio Grande do Norte" />
+								<f:selectItem itemValue="22" itemLabel="Rondônia" />
+								<f:selectItem itemValue="21" itemLabel="Rio Grande do Sul" />
+								<f:selectItem itemValue="23" itemLabel="Roraima" />
+								<f:selectItem itemValue="24" itemLabel="Santa Catarina" />
+								<f:selectItem itemValue="26" itemLabel="Sergipe" />
+								<f:selectItem itemValue="25" itemLabel="São Paulo" />
+								<f:selectItem itemValue="27" itemLabel="Tocantins" />
+							</h:selectOneMenu>
+							</div>
 						</div>
-						
-						<div class="form-group">
-							<h:outputLabel value="CPF:" />
-							<h:inputText value="#{clienteMb.CPF}" type="text" class="form-control"
-								placeholder="CPF" />					
+						<div class="botaoSalvar">
+							<h:commandButton action="#{clienteMb.salvar}"
+								styleClass="btn btn-default" value="Salvar" />
 						</div>
-						
-						<div class="form-group">
-							<h:outputLabel value="Rua:" />
-							<h:inputText value="#{clienteMb.rua}"
-								styleClass="form-control" />
-						</div>
-						
-						<div class="form-group">
-							<h:outputLabel value="Numero:" />
-							<h:inputText value="#{clienteMb.numero}"
-								styleClass="form-control" />
-						</div>
-						
-						<div class="form-group">
-							<h:outputLabel value="Bairro:" />
-							<h:inputText value="#{clienteMb.bairro}"
-								styleClass="form-control" />
-						</div>
-						<div class="form-group">
-							<h:outputLabel value="CEP:" />
-							<h:inputText value="#{clienteMb.CEP}"
-								styleClass="form-control" />
-						</div>
-						<div class="form-group">
-							<h:outputLabel value="Cidade:" />
-							<h:inputText value="#{clienteMb.cidade}"
-								styleClass="form-control" />
-						</div>
-						<div class="form-group">
-							<h:outputLabel value="UF:" />
-							<h:inputText value="#{clienteMb.UF}"
-								styleClass="form-control" />
-						</div>
-						<div class="form-group">
-							<h:outputLabel value="Telefone:" />
-							<h:inputText value="#{clienteMb.telefone}"
-								styleClass="form-control" />
-						</div>
-						<div class="form-group">
-							<h:outputLabel value="Celular:" />
-							<h:inputText value="#{clienteMb.celular}"
-								styleClass="form-control" />
-						</div>
-						<h:commandButton action="#{clienteMb.salvar}" styleClass="btn btn-default" value="Salvar" />
 					</h:form>
-				</div>	
+				</div>
 			</div>
 		</div>
 	</ui:define>
