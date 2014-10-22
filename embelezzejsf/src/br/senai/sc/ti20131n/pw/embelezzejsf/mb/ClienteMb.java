@@ -2,10 +2,12 @@ package br.senai.sc.ti20131n.pw.embelezzejsf.mb;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ClienteDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 
@@ -13,9 +15,8 @@ import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 public class ClienteMb {
 	
 	private Cliente cliente;
-	private EntityManager entityManger;
-
-
+	private ClienteDao dao;
+	private EntityManager entityManager;
 	private List<Cliente> listaClientes;
 	private Long ID;
 	private String nome;
@@ -30,15 +31,16 @@ public class ClienteMb {
 	private String telefone;
 	private String celular;
 
-	
+	@PostConstruct
 	public void init(){
 		setCliente(new Cliente());
-		entityManger = Util.getEntityManager();
+		dao = new ClienteDao(entityManager);
+		entityManager = Util.getEntityManager();
 	}
 	
 	public List<Cliente> getListaClientes() {
 		if (listaClientes == null) {
-			Query query = Util.getEntityManager().createQuery(
+			Query query = entityManager.createQuery(
 					"SELECT c FROM Cliente c", Cliente.class);
 			listaClientes = query.getResultList();
 		}
@@ -153,29 +155,18 @@ public class ClienteMb {
 	}
 
 	public String salvar() {
-		System.out.println("Salvou!");
-		Cliente cliente = new Cliente();
+		entityManager.merge(cliente);
+		return "listagemClientes";
+	}
 
-		cliente.setNome(nome);
-		cliente.setCPF(CPF);
-		cliente.setRua(rua);
-		cliente.setNumero(numero);
-		cliente.setBairro(bairro);
-		cliente.setCEP(CEP);
-		cliente.setCidade(cidade);
-		cliente.setUF(UF);
-		cliente.setEmail(email);
-		cliente.setTelefone(telefone);
-		cliente.setCelular(celular);
-
-		Util.getEntityManager().persist(cliente);
-		return "";
-
+	public String editar(Long ID){
+		cliente = entityManager.find(Cliente.class, ID);
+		return "formcadclientes";
 	}
 	
 	public String excluir(Long ID){
-	    Cliente cliente = entityManger.find(Cliente.class, ID);
-		entityManger.remove(cliente);
+	    Cliente cliente = entityManager.getReference(Cliente.class, ID);
+		entityManager.remove(cliente);
 		listaClientes = null;
 		return "listagemClientes";
 	}
