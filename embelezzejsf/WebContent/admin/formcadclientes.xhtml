@@ -4,19 +4,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../WEB-INF/templates/base.xhtml">
 	<ui:define name="content">
 
 		<div class="corpo">
 			<div class="container_cadClientes">
-				<h1>
-					Cadastro <small>Clientes</small>
-				</h1>
+				<h:panelGrid rendered="#{empty clienteMb.cliente.ID}">
+					<h1>
+						Cadastro <small>Clientes</small>
+					</h1>
+				</h:panelGrid>
+				<h:panelGrid rendered="#{!empty clienteMb.cliente.ID}">
+					<h1>
+						Edição <small>Cliente</small>
+					</h1>
+				</h:panelGrid>
 				<br />
 				<div class="col-md-12">
-					<h:form role="form">
+					<h:form role="form" id="formulario">
 						<div class="cadClientes1">
 
 							<h:panelGrid rendered="#{!empty clienteMb.cliente.ID}">
@@ -87,39 +95,42 @@
 							<div class="form-group" id="combobox">
 								<h:selectOneMenu value="#{clienteMb.cliente.UF}"
 									styleClass="form-control">
-									<f:selectItem itemValue="1" itemLabel="Alagoas" />
-									<f:selectItem itemValue="2" itemLabel="Acre" />
-									<f:selectItem itemValue="3" itemLabel="Amazonas" />
-									<f:selectItem itemValue="4" itemLabel="Amapá" />
-									<f:selectItem itemValue="5" itemLabel="Bahia" />
-									<f:selectItem itemValue="6" itemLabel="Ceará" />
-									<f:selectItem itemValue="7" itemLabel="Distrito Federal" />
-									<f:selectItem itemValue="8" itemLabel="Espirito Santo" />
-									<f:selectItem itemValue="9" itemLabel="Goiás" />
-									<f:selectItem itemValue="10" itemLabel="Maranhão" />
-									<f:selectItem itemValue="11" itemLabel="Mato Grosso" />
-									<f:selectItem itemValue="12" itemLabel="Mato Grosso do Sul" />
-									<f:selectItem itemValue="13" itemLabel="Minas Gerais" />
-									<f:selectItem itemValue="14" itemLabel="Pará" />
-									<f:selectItem itemValue="15" itemLabel="Paraíba" />
-									<f:selectItem itemValue="16" itemLabel="Paraná" />
-									<f:selectItem itemValue="17" itemLabel="Pernambuco" />
-									<f:selectItem itemValue="18" itemLabel="Piauí" />
-									<f:selectItem itemValue="19" itemLabel="Rio de Janeiro" />
-									<f:selectItem itemValue="20" itemLabel="Rio Grande do Norte" />
-									<f:selectItem itemValue="22" itemLabel="Rondônia" />
-									<f:selectItem itemValue="21" itemLabel="Rio Grande do Sul" />
-									<f:selectItem itemValue="23" itemLabel="Roraima" />
-									<f:selectItem itemValue="24" itemLabel="Santa Catarina" />
-									<f:selectItem itemValue="26" itemLabel="Sergipe" />
-									<f:selectItem itemValue="25" itemLabel="São Paulo" />
-									<f:selectItem itemValue="27" itemLabel="Tocantins" />
+									<f:selectItem itemValue="AL" itemLabel="Alagoas" />
+									<f:selectItem itemValue="AC" itemLabel="Acre" />
+									<f:selectItem itemValue="AM" itemLabel="Amazonas" />
+									<f:selectItem itemValue="AP" itemLabel="Amapá" />
+									<f:selectItem itemValue="BA" itemLabel="Bahia" />
+									<f:selectItem itemValue="CE" itemLabel="Ceará" />
+									<f:selectItem itemValue="DF" itemLabel="Distrito Federal" />
+									<f:selectItem itemValue="ES" itemLabel="Espirito Santo" />
+									<f:selectItem itemValue="GO" itemLabel="Goiás" />
+									<f:selectItem itemValue="MA" itemLabel="Maranhão" />
+									<f:selectItem itemValue="MT" itemLabel="Mato Grosso" />
+									<f:selectItem itemValue="MS" itemLabel="Mato Grosso do Sul" />
+									<f:selectItem itemValue="MG" itemLabel="Minas Gerais" />
+									<f:selectItem itemValue="PA" itemLabel="Pará" />
+									<f:selectItem itemValue="PB" itemLabel="Paraíba" />
+									<f:selectItem itemValue="PR" itemLabel="Paraná" />
+									<f:selectItem itemValue="PE" itemLabel="Pernambuco" />
+									<f:selectItem itemValue="PI" itemLabel="Piauí" />
+									<f:selectItem itemValue="RJ" itemLabel="Rio de Janeiro" />
+									<f:selectItem itemValue="RN" itemLabel="Rio Grande do Norte" />
+									<f:selectItem itemValue="RO" itemLabel="Rondônia" />
+									<f:selectItem itemValue="RS" itemLabel="Rio Grande do Sul" />
+									<f:selectItem itemValue="RR" itemLabel="Roraima" />
+									<f:selectItem itemValue="SC" itemLabel="Santa Catarina" />
+									<f:selectItem itemValue="SE" itemLabel="Sergipe" />
+									<f:selectItem itemValue="SP" itemLabel="São Paulo" />
+									<f:selectItem itemValue="TO" itemLabel="Tocantins" />
 								</h:selectOneMenu>
 							</div>
 						</div>
 						<div class="botaoSalvar">
-							<h:commandButton action="#{clienteMb.salvar}"
-								styleClass="btn btn-default" value="Salvar" />
+							<h:messages></h:messages>
+							<p:growl id="growl" life="2000" />
+							<p:commandButton value="Salvar" id="ajax"
+								update="growl, formulario" action="#{clienteMb.salvar}"
+								styleClass="btn btn-default" />
 						</div>
 					</h:form>
 				</div>

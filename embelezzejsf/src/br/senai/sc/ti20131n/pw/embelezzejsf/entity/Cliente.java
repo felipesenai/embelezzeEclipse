@@ -1,17 +1,20 @@
 package br.senai.sc.ti20131n.pw.embelezzejsf.entity;
 
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import sun.invoke.empty.Empty;
 
 @Entity
 public class Cliente {
 	
 	@Id
 	@GeneratedValue
-	private Long ID;
+	private Long ID = null;
 	@Column(length=30, nullable=false)
 	private String Nome;
 	@Column(length=14, nullable=false,unique=true)

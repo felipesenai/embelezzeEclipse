@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../WEB-INF/templates/base.xhtml">
 	<ui:define name="content">
@@ -16,6 +17,10 @@
 				</h1>
 				<br />
 				<h:form>
+				<h:panelGrid columns="3">
+					<!-- <h:commandButton action="" value="Pesquisar"/> -->
+				</h:panelGrid>
+				<p:growl id="growl" life="2000" />
 					<h:dataTable value="#{clienteMb.listaClientes}" var="listarcli"
 						class="table table-striped">
 						<h:column>
@@ -72,7 +77,7 @@
 							<h:commandLink action="#{clienteMb.editar(listarcli.ID)}"
 								styleClass="btn">
 								<span class="glyphicon glyphicon-pencil"></span>
-							</h:commandLink>	
+							</h:commandLink>
 							<h:commandLink action="#{clienteMb.excluir(listarcli.ID)}"
 								styleClass="btn">
 								<span class="glyphicon glyphicon-trash"></span>

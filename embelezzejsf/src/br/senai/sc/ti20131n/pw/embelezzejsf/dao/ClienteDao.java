@@ -18,7 +18,7 @@ public class ClienteDao {
 	
 	public boolean salvar(Cliente cliente){
 		try {
-			entityManager.persist(cliente);
+			entityManager.merge(cliente);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -3,37 +3,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
-	<link rel="stylesheet" href="#{resource['css/style.css']}" />
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title><ui:insert name="title">Embelezze</ui:insert></title>
 	<link rel="shortcut icon" href="#{resource['img/favicon.ico']}"></link>
+	<link rel="stylesheet" href="#{resource['css/style.css']}" />
+	<link rel="stylesheet" href="#{resource['css/gallery.css']}" />
+	<link rel="stylesheet" href="#{resource['css/gallery.min.css']}" />
+	<link rel="stylesheet" href="#{resource['css/gallery.prefixed.css']}" />
+	<link rel="stylesheet" href="#{resource['css/gallery.prefixed.min.css']}" />
+	<link rel="stylesheet" href="#{resource['css/gallery.theme.css']}" />
 
-	<h:outputStylesheet library="css" name="base.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="base.css" />
 	<!-- Latest compiled and minified CSS -->
-	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 	<!-- Optional theme -->
-	<h:outputStylesheet library="css" name="bootstrap-theme.min.css"></h:outputStylesheet>
-	
+	<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
+
 	<!-- Placed at the end of the document so the pages load faster -->
 	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
-	
+
 </h:head>
 <h:body>
 	<div class="container content">
 		<div class="page-header">
 			<ui:insert name="page-title">
 				<div class="logo">
-					<img src="#{resource['img/logo.png']}"/>
+					<img src="#{resource['img/logo.png']}" />
 				</div>
 			</ui:insert>
-				<ui:include src="/WEB-INF/templates/menu.xhtml"></ui:include>		
+			<ui:include src="/WEB-INF/templates/menu.xhtml"></ui:include>
 		</div>
 		<ui:insert name="content"></ui:insert>
 		<ui:include src="/WEB-INF/templates/rodape.xhtml"></ui:include>
 	</div>
-	
-	
+
+
 	<!-- Latest compiled and minified JavaScript -->
 	<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
 </h:body>
