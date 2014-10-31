@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="WEB-INF/templates/base.xhtml">
+
+
+	<ui:define name="content">
+		<div class="container_cadClientes">
+			<ui:repeat var="p" value="#{produtoMb.produtos}">
+
+				<div class="row"
+					style="width: 170px; float: left; margin-left: 40px; padding-top: 40px">
+					<h:graphicImage styleClass="img-responsive"
+						rendered="#{!empty p.imagem}"
+						value="#{produtoMb.getCaminhoRelativo(p.imagem)}" />
+					<br />
+					<h:outputText value="#{p.nomeProduto}" />
+					<br />
+					<h:outputLabel value="Marca: " />
+					<h:outputText value=" #{p.marcaProduto}" />
+					<br />
+					<h:outputLabel value="Valor:" />
+					<h:outputText value=" R$#{p.precoProduto}" />
+					<br />
+				</div>
+
+			</ui:repeat>
+
+
+
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

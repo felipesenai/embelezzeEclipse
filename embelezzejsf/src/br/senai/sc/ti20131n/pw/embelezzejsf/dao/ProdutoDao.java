@@ -4,9 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
-import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Produto;
+import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Produtos;
 
 public class ProdutoDao {
 	
@@ -18,7 +17,7 @@ public class ProdutoDao {
 		this.entityManager = entityManager;
 	}
 	
-	public boolean salvar(Produto produto){
+	public boolean salvar(Produtos produto){
 		try {
 			entityManager.persist(produto);
 			return true;
@@ -28,21 +27,21 @@ public class ProdutoDao {
 		}
 	}
 	
-	public Produto buscarPorId(Long ID){
-		return entityManager.find(Produto.class, ID);
+	public Produtos buscarPorId(Long ID){
+		return entityManager.find(Produtos.class, ID);
 	}
 	
 	public void excluirProdutoPorId(Integer l){
-		Produto produto = entityManager.getReference(Produto.class, l);
+		Produtos produto = entityManager.getReference(Produtos.class, l);
 		entityManager.remove(produto);
 	}
 	
-	public void atualizar(Produto produto){
+	public void atualizar(Produtos produto){
 		entityManager.merge(produto);
 	}
 	
-	public List<Produto> listarProdutoPorNome(String nomeProduto){
-		Query query = entityManager.createQuery("From Produto",Produto.class);
+	public List<Produtos> listarProdutoPorNome(String nomeProduto){
+		Query query = entityManager.createQuery("From Produto",Produtos.class);
 		return query.getResultList();
 	}
 }

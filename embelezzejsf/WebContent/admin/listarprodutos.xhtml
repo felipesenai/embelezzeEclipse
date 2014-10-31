@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="../WEB-INF/templates/base.xhtml">
+	<ui:define name="content">
+
+		<div class="corpo">
+			<div class="container_listaProdutos">
+				<h1>
+					Lista <small>Produtos</small>
+				</h1>
+
+				<br />
+
+				<h:form>
+					<h:dataTable value="#{produtoMb.produtos}" var="p"
+						styleClass="table">
+
+						<h:column>
+							<f:facet name="header">Codigo</f:facet>
+							<h:outputText value="#{p.ID}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Nome</f:facet>
+							<h:outputText value="#{p.nomeProduto}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Marca</f:facet>
+							<h:outputText value="#{p.marcaProduto}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Preço</f:facet>
+							<h:outputText value="#{p.precoProduto}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Imagem</f:facet>
+							<h:outputText value="#{p.imagem}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header" /> 	
+							<h:commandLink action="#{produtoMb.editar(p.ID)}"
+								styleClass="btn">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</h:commandLink>
+							<h:commandLink action="#{produtoMb.excluir(p.ID)}"
+								styleClass="btn">
+								<span class="glyphicon glyphicon-trash"></span>
+							</h:commandLink>
+						</h:column>
+
+
+					</h:dataTable>
+				</h:form>
+				<h:panelGrid rendered="#{empty produtoMb.produtos}">
+		Sem registros
+		</h:panelGrid>
+
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

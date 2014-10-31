@@ -2,23 +2,32 @@ package br.senai.sc.ti20131n.pw.embelezzejsf.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Produto {
+public class Produtos {
 	
 	@Id
-	private Integer idProduto;
+	@GeneratedValue
+	private Long ID = null;
 	private String marcaProduto;
 	private Double precoProduto;
 	private String nomeProduto;
+	private String imagem;
 	
 	
-	public Integer getIdProduto() {
-		return idProduto;
+	public String getImagem() {
+		return imagem;
 	}
-	public void setIdProduto(Integer idProduto) {
-		this.idProduto = idProduto;
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+	public Long getID() {
+		return ID;
+	}
+	public void setID(Long ID) {
+		this.ID = ID;
 	}
 	public String getNomeProduto() {
 		return nomeProduto;

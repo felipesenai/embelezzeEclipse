@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../WEB-INF/templates/base.xhtml">
+	<ui:define name="content">
+		<div class="corpo">
+			<div class="container_cadProdutos">
+				<h:form role="form" enctype="multipart/form-data" id="formulario">
+					<div class="cadProdutosColuna1">
+						<!-- <h:panelGrid rendered="#{!empty produtoMb.produto.ID}">
+				<div class="form-group">
+					<h:outputLabel value="Cód" />
+					<h:inputText styleClass="form-control" readonly="true"
+						value="#{produtoMb.produto.ID}" />
+				</div>
+			</h:panelGrid> -->
+
+						<h:panelGrid rendered="#{empty produtoMb.produto.ID}">
+							<h1>
+								Cadastro <small>Produto</small>
+							</h1>
+						</h:panelGrid>
+						<h:panelGrid rendered="#{!empty produtoMb.produto.ID}">
+							<h1>
+								Edição <small>Produto</small>
+							</h1>
+						</h:panelGrid>
+
+						<h:inputHidden value="#{produtoMb.produto.ID}" />
+						<br />
+						<div class="form-group">
+							<h:outputLabel value="Nome do produto:" />
+							<h:inputText styleClass="form-control"
+								value="#{produtoMb.produto.nomeProduto}" />
+						</div>
+						<br />
+						<div class="form-group">
+							<h:outputLabel value="Valor:" />
+							<h:inputText styleClass="form-control"
+								value="#{produtoMb.produto.precoProduto}" />
+						</div>
+						<br />
+						<div class="form-group">
+							<h:outputLabel value="Marca:" />
+							<h:inputTextarea styleClass="form-control"
+								value="#{produtoMb.produto.marcaProduto}" />
+							<div class="form-group">
+								<br />
+
+								<h:outputLabel value="Imagem: " />
+								<h:inputFile value="#{produtoMb.imagem}">
+									<f:validator validatorId="validator.ImagemValidator" />
+								</h:inputFile><br />
+								<h:inputHidden value="#{produtoMb.produto.imagem}" />
+								<h:graphicImage styleClass="img-responsive"
+									rendered="#{!empty produtoMb.produto.imagem}"
+									value="#{produtoMb.getCaminhoRelativo(produtoMb.produto.imagem)}" />
+								<br />
+
+							</div>
+						</div>
+						<h:commandButton value="Salvar" action="#{produtoMb.salvar}"
+							styleClass="btn btn-default" />
+
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

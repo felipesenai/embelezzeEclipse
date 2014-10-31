@@ -25,8 +25,7 @@
 				<br />
 				<div class="col-md-12">
 					<h:form role="form" id="formulario">
-						<div class="cadClientes1">
-
+						<div class="cadClientesColuna1">
 							<h:panelGrid rendered="#{!empty clienteMb.cliente.ID}">
 								<div class="form-group">
 									<h:outputLabel value="Cód:" />
@@ -71,7 +70,7 @@
 							</div>
 
 						</div>
-						<div class="cadClientes2">
+						<div class="cadClientesColuna2">
 							<div class="form-group">
 								<h:outputLabel value="Numero:" />
 								<h:inputText value="#{clienteMb.cliente.numero}"
