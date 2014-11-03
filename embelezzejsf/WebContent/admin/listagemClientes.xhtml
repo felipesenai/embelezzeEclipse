@@ -17,74 +17,80 @@
 				</h1>
 				<br />
 				<h:form>
-				<h:panelGrid columns="3">
-					<!-- <h:commandButton action="" value="Pesquisar"/> -->
-				</h:panelGrid>
-				<p:growl id="growl" life="2000" />
-					<h:dataTable value="#{clienteMb.listaClientes}" var="listarcli"
-						class="table table-striped">
-						<h:column>
-							<f:facet name="header">Cód.</f:facet>
-							<h:outputText value="#{listarcli.ID}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Nome</f:facet>
-							<h:outputText value="#{listarcli.nome}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">CPF</f:facet>
-							<h:outputText value="#{listarcli.CPF}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Email</f:facet>
-							<h:outputText value="#{listarcli.email}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Rua</f:facet>
-							<h:outputText value="#{listarcli.rua}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Numero</f:facet>
-							<h:outputText value="#{listarcli.numero}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Bairro</f:facet>
-							<h:outputText value="#{listarcli.bairro}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">CEP</f:facet>
-							<h:outputText value="#{listarcli.CEP}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Cidade</f:facet>
-							<h:outputText value="#{listarcli.cidade}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">UF</f:facet>
-							<h:outputText value="#{listarcli.UF}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Telefone</f:facet>
-							<h:outputText value="#{listarcli.telefone}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Celular</f:facet>
-							<h:outputText value="#{listarcli.celular}" />
-						</h:column>
-		
-						<h:column>
+					<p:dataTable value="#{clienteMb.listaClientes}" var="listaCliente"
+						rows="10" paginator="true"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">>
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Pesquisar: " />
+								<p:inputText id="globalFilter"
+									onkeyup="PF('Cliente').filter()" style="width:250px; margin-right:65%"
+									placeholder="Informe o nome" />
+							</p:outputPanel>
+						</f:facet>
+						<p:column headerText="ID">
+							<h:outputText value="#{listaCliente.ID}" />
+						</p:column>
+
+						<p:column headerText="Nome">
+							<h:outputText value="#{listaCliente.nome}" />
+						</p:column>
+
+						<p:column headerText="CPF">
+							<h:outputText value="#{listaCliente.CPF}" />
+						</p:column>
+
+						<p:column headerText="Email">
+							<h:outputText value="#{listaCliente.email}" />
+						</p:column>
+
+						<!-- 						<p:column headerText="Rua">
+							<h:outputText value="#{listaCliente.rua}" />
+						</p:column>
+
+						<p:column headerText="Número">
+							<h:outputText value="#{listaCliente.numero}" />
+						</p:column>
+
+						<p:column headerText="Bairro">
+							<h:outputText value="#{listaCliente.bairro}" />
+						</p:column>
+
+						<p:column headerText="CEP">
+							<h:outputText value="#{listaCliente.CEP}" />
+						</p:column>
+
+						<p:column headerText="Cidade">
+							<h:outputText value="#{listaCliente.cidade}" />
+						</p:column>
+
+						<p:column headerText="UF">
+							<h:outputText value="#{listaCliente.UF}" />
+						</p:column> -->
+
+						<p:column headerText="Telefone">
+							<h:outputText value="#{listaCliente.telefone}" />
+						</p:column>
+
+						<p:column headerText="Celular">
+							<h:outputText value="#{listaCliente.celular}" />
+						</p:column>
+
+						<p:column>
 							<f:facet name="header"></f:facet>
-							<h:commandLink action="#{clienteMb.editar(listarcli.ID)}"
+							<p:commandLink action="#{clienteMb.editar(listaCliente.ID)}"
 								styleClass="btn">
 								<span class="glyphicon glyphicon-pencil"></span>
-							</h:commandLink>
-							<h:commandLink action="#{clienteMb.excluir(listarcli.ID)}"
+							</p:commandLink>
+
+							<p:commandLink action="#{clienteMb.excluir(listaCliente.ID)}"
 								styleClass="btn">
 								<span class="glyphicon glyphicon-trash"></span>
-							</h:commandLink>
-						</h:column> 
-					</h:dataTable>
+							</p:commandLink>
+						</p:column>
 
+					</p:dataTable>
 				</h:form>
 			</div>
 		</div>

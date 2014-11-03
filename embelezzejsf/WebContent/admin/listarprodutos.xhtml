@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../WEB-INF/templates/base.xhtml">
 	<ui:define name="content">
@@ -18,47 +19,54 @@
 				<br />
 
 				<h:form>
-					<h:dataTable value="#{produtoMb.produtos}" var="p"
-						styleClass="table">
+					<p:dataTable value="#{produtoMb.produtos}" var="p" rows="10" paginator="true"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Pesquisar: " />
+								<p:inputText id="globalFilter"
+									onkeyup="PF('Produto').filter()" style="width:250px; margin-right:65%"
+									placeholder="Informe o nome" />
+							</p:outputPanel>
+						</f:facet>
 
-						<h:column>
-							<f:facet name="header">Codigo</f:facet>
+						<p:column>
+							<f:facet name="header">Cód</f:facet>
 							<h:outputText value="#{p.ID}" />
-						</h:column>
+						</p:column>
 
-						<h:column>
+						<p:column>
 							<f:facet name="header">Nome</f:facet>
 							<h:outputText value="#{p.nomeProduto}" />
-						</h:column>
+						</p:column>
 
-						<h:column>
+						<p:column>
 							<f:facet name="header">Marca</f:facet>
 							<h:outputText value="#{p.marcaProduto}" />
-						</h:column>
+						</p:column>
 
-						<h:column>
+						<p:column>
 							<f:facet name="header">Preço</f:facet>
 							<h:outputText value="#{p.precoProduto}" />
-						</h:column>
+						</p:column>
 
-						<h:column>
+						<p:column>
 							<f:facet name="header">Imagem</f:facet>
 							<h:outputText value="#{p.imagem}" />
-						</h:column>
-						<h:column>
+						</p:column>
+						<p:column>
 							<f:facet name="header" /> 	
-							<h:commandLink action="#{produtoMb.editar(p.ID)}"
+							<p:commandLink action="#{produtoMb.editar(p.ID)}"
 								styleClass="btn">
 								<span class="glyphicon glyphicon-pencil"></span>
-							</h:commandLink>
-							<h:commandLink action="#{produtoMb.excluir(p.ID)}"
+							</p:commandLink>
+							<p:commandLink action="#{produtoMb.excluir(p.ID)}"
 								styleClass="btn">
 								<span class="glyphicon glyphicon-trash"></span>
-							</h:commandLink>
-						</h:column>
-
-
-					</h:dataTable>
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
 				</h:form>
 				<h:panelGrid rendered="#{empty produtoMb.produtos}">
 		Sem registros
