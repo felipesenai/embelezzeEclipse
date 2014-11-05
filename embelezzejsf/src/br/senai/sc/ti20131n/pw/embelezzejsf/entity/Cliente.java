@@ -14,7 +14,7 @@ public class Cliente {
 	
 	@Id
 	@GeneratedValue
-	private Long ID = null;
+	private Long ID;
 	@Column(length=30, nullable=false)
 	private String Nome;
 	@Column(length=14, nullable=false,unique=true)

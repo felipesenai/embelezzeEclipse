@@ -2,11 +2,17 @@ package br.senai.sc.ti20131n.pw.embelezzejsf.mb;
 
 import java.io.IOException;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.servlet.http.Part;
+
+import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Produtos;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.UploadImageUtil;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
@@ -76,10 +82,13 @@ public class ProdutosMb {
 	}
 
 	public String salvar() throws IOException {
-		imagemAntiga = produto.getImagem();
-		produto.setImagem(UploadImageUtil.copiar(imagem, imagemAntiga));
-		entityManager.merge(produto);
-
+		if (validaCamposVazios()) {
+			imagemAntiga = produto.getImagem();
+			produto.setImagem(UploadImageUtil.copiar(imagem, imagemAntiga));
+			entityManager.merge(produto);
+			addMessage("Produto salvo com sucesso!");
+			produto = new Produtos();
+		}
 		return "listarprodutos";
 	}
 
@@ -94,6 +103,27 @@ public class ProdutosMb {
 		entityManager.remove(produtos);
 		produtos = null;
 		return "listarprodutos";
+	}
+
+	public void buttonAction(ActionEvent actionEvent) {
+		addMessage("Mensagem do button Action!");
+	}
+
+	public void addMessage(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				summary, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
+	public boolean validaCamposVazios() {
+		if (produto.getNomeProduto().isEmpty()) {
+			addMessage("O nome do produto está vazio");
+			return false;
+		} else if (produto.getMarcaProduto().isEmpty()) {
+			addMessage("A marca do produto está vazia");
+			return false;
+		}
+		return true;
 	}
 
 }

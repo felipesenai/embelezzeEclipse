@@ -12,7 +12,7 @@ public class ClienteDao {
 	private static EntityManager entityManager;
 
 	
-	public ClienteDao(EntityManager entityManager){
+	public ClienteDao(){
 		this.entityManager = entityManager;
 	}
 	

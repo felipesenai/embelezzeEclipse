@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ClienteDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ProdutoDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
-import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Produto;
+import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Produtos;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 
 
@@ -58,7 +58,7 @@ public class ProdutoDaoTest {
 	
 	@Test
 	public void testSalvarProduto(){
-		Produto produto = new Produto();
+		Produtos produto = new Produtos();
 		produto.setNomeProduto("Prada");
 		produto.setMarcaProduto("Luna Rossa");;
 	    produto.setPrecoProduto(289.00);
@@ -68,22 +68,22 @@ public class ProdutoDaoTest {
 
 	@Test
 	public void verificaSeOProdutoFoiRealmenteDeletado() {
-		Produto produtoDeletado = dao.buscarPorId(1L);
+		Produtos produtoDeletado = dao.buscarPorId(1L);
 		entityManager.getTransaction().begin();
-		dao.excluirProdutoPorId(produtoDeletado.getIdProduto());
+		dao.excluirProdutoPorId(produtoDeletado.getID());
 		entityManager.getTransaction().commit();
 		Assert.assertEquals(null, dao.buscarPorId(1L));
 	}
 	
 	@Test
 	public void buscarPorId(){
-		Produto produto = dao.buscarPorId(1L);
+		Produtos produto = dao.buscarPorId(1L);
 		Assert.assertNotNull(produto);
 	}
 	
 	@Test
 	public void atualizaCliente() {
-		Produto produtoEditado = dao.buscarPorId(1L);
+		Produtos produtoEditado = dao.buscarPorId(1L);
 		produtoEditado.setNomeProduto("Teste Alteração");
 		produtoEditado.setMarcaProduto("Teste alteração marca");
 		produtoEditado.setPrecoProduto(0.00);
@@ -92,7 +92,7 @@ public class ProdutoDaoTest {
 		dao.atualizar(produtoEditado);
 		entityManager.getTransaction().commit();
 
-		Produto produto = dao.buscarPorId(1L);
+		Produtos produto = dao.buscarPorId(1L);
 		Assert.assertEquals(produtoEditado.getNomeProduto(), produto.getNomeProduto());
 		Assert.assertEquals(produtoEditado.getMarcaProduto(), produto.getMarcaProduto());
 		Assert.assertEquals(produtoEditado.getPrecoProduto(), produto.getPrecoProduto());

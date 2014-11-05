@@ -1,6 +1,10 @@
 package br.senai.sc.ti20131n.pw.embelezzejsf.mb;
 
 import javax.faces.bean.ManagedBean;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
+import br.senai.sc.ti20131n.pw.embelezzejsf.util.EmailUtil;
 
 @ManagedBean
 public class ContatoMb {
@@ -30,8 +34,17 @@ public class ContatoMb {
 	}
 	
 	public String enviar(){
-
+		String mensagemText = "Nome: " + nome +
+							  "\nEmail: " + email +
+							  "\nMensagem: " + mensagem;
 		
+		try {
+			EmailUtil.enviarEmail(email, "Contato via site.", mensagemText);
+		} catch (AddressException e) {
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}		
 		return "";
 	}
 	

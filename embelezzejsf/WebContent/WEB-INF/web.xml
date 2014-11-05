@@ -14,9 +14,28 @@
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   <context-param>
-    <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
-    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
-    <param-value>client</param-value>
+    <param-name>servidor</param-name>
+    <param-value>smtp.gmail.com</param-value>
+  </context-param>
+  <context-param>
+    <param-name>porta</param-name>
+    <param-value>587</param-value>
+  </context-param>
+  <context-param>
+    <param-name>usuario</param-name>
+    <param-value>felipe.florianopolis@gmail.com</param-value>
+  </context-param>
+  <context-param>
+    <param-name>senha</param-name>
+    <param-value>superperigo1821</param-value>
+  </context-param>
+  <context-param>
+    <param-name>tls</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>auth</param-name>
+    <param-value>true</param-value>
   </context-param>
   <context-param>
     <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>

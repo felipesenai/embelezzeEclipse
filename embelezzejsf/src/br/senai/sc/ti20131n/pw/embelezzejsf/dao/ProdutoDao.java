@@ -31,7 +31,7 @@ public class ProdutoDao {
 		return entityManager.find(Produtos.class, ID);
 	}
 	
-	public void excluirProdutoPorId(Integer l){
+	public void excluirProdutoPorId(Long l){
 		Produtos produto = entityManager.getReference(Produtos.class, l);
 		entityManager.remove(produto);
 	}

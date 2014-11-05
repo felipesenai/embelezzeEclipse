@@ -15,18 +15,17 @@
 				<h1>
 					Lista <small>Produtos</small>
 				</h1>
-
 				<br />
-
 				<h:form>
-					<p:dataTable value="#{produtoMb.produtos}" var="p" rows="10" paginator="true"
+					<p:dataTable value="#{produtoMb.produtos}" var="p" rows="10"
+						paginator="true"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="5,10,15">
 						<f:facet name="header">
 							<p:outputPanel>
 								<h:outputText value="Pesquisar: " />
-								<p:inputText id="globalFilter"
-									onkeyup="PF('Produto').filter()" style="width:250px; margin-right:65%"
+								<p:inputText id="globalFilter" onkeyup="PF('Produto').filter()"
+									style="width:250px; margin-right:65%"
 									placeholder="Informe o nome" />
 							</p:outputPanel>
 						</f:facet>
@@ -56,7 +55,7 @@
 							<h:outputText value="#{p.imagem}" />
 						</p:column>
 						<p:column>
-							<f:facet name="header" /> 	
+							<f:facet name="header" />
 							<p:commandLink action="#{produtoMb.editar(p.ID)}"
 								styleClass="btn">
 								<span class="glyphicon glyphicon-pencil"></span>

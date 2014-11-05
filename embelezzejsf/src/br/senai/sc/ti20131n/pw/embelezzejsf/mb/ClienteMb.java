@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
+import apple.laf.JRSUIConstants.ShowArrows;
 import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ClienteDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
@@ -19,15 +20,17 @@ import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 public class ClienteMb {
 
 	private Cliente cliente;
-	private ClienteDao dao;
+	private ClienteDao clienteDao;
 	private EntityManager entityManager;
 	private List<Cliente> listaClientes;
 
 	@PostConstruct
 	public void init() {
-		setCliente(new Cliente());
-		dao = new ClienteDao(entityManager);
-		entityManager = Util.getEntityManager();
+		// setCliente(new Cliente());
+		// clienteDao = new ClienteDao(entityManager);
+		// entityManager = Util.getEntityManager();
+		cliente = new Cliente();
+		clienteDao = new ClienteDao();
 	}
 
 	public List<Cliente> getListaClientes() {
@@ -52,11 +55,12 @@ public class ClienteMb {
 	}
 
 	public String salvar() {
-		if (validaCamposVazios()) { 
-			entityManager.merge(cliente);
-			addMessage("Cliente salvo com sucesso!");
-			cliente = new Cliente();
-		}	
+			if (validaCamposVazios()) {
+				System.out.println(cliente.getID());
+				clienteDao.salvar(getCliente());
+				addMessage("Cliente salvo com sucesso!");
+				cliente = new Cliente();
+			}
 			return "";
 	}
 
@@ -83,8 +87,11 @@ public class ClienteMb {
 	}
 
 	public boolean validaCamposVazios() {
-		if (cliente.getNome().isEmpty() || cliente.getCPF().isEmpty()) {
-				addMessage("Nome ou CPF estão vazios");
+		if (cliente.getNome().isEmpty()) {
+			addMessage("Nome está vazio");
+			return false;
+		} else if (cliente.getCPF().isEmpty()) {
+			addMessage("CPF está vazio");
 			return false;
 		}
 		return true;

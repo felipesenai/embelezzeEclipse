@@ -18,7 +18,7 @@ public class Main {
 	
 	public static EntityManager entityManager = entityManagerFactory.createEntityManager();
 	
-	public static ClienteDao dao = new ClienteDao(entityManager);
+	public static ClienteDao dao = new ClienteDao();
 	
 	public static Cliente cliente = new Cliente();
 	
