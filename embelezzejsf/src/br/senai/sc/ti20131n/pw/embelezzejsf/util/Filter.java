@@ -17,6 +17,7 @@ public class Filter implements javax.servlet.Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain filterChain) throws IOException, ServletException {
+		
 		EntityManager entityManager = Util.createEntityManager();
 		
 		Util.setEntityManager(request, entityManager);
@@ -26,6 +27,7 @@ public class Filter implements javax.servlet.Filter{
 			filterChain.doFilter(request, response);
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			entityManager.getTransaction().rollback();
 		} finally {
 			entityManager.close();

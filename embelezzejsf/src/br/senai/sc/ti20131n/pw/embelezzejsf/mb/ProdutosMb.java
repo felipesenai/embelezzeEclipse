@@ -8,61 +8,49 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.servlet.http.Part;
 
-import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
+import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ProdutoDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Produtos;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.UploadImageUtil;
-import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 
-@ManagedBean(name = "produtoMb")
+@ManagedBean
 public class ProdutosMb {
-	private List<Produtos> listaProdutos;
-	private EntityManager entityManager;
+	
 	private Produtos produto;
+
+	private List<Produtos> listaProdutos;
+	private ProdutoDao produtoDao;
 	private Part imagem;
 	private String imagemAntiga;
 
 	@PostConstruct
 	private void init() {
 		produto = new Produtos();
-		entityManager = Util.getEntityManager();
+		produtoDao = new ProdutoDao();
 	}
-
-	public String getCaminhoRelativo(String nomeImagem) {
-		return UploadImageUtil.getCaminho(nomeImagem);
-	}
-
-	public List<Produtos> getProdutos() {
-		if (listaProdutos == null) {
-			Query query = entityManager.createQuery("SELECT p FROM Produtos p",
-					Produtos.class);
-			listaProdutos = query.getResultList();
-		}
-		return listaProdutos;
-
-	}
-
-	public void setProdutos(List<Produtos> produtos) {
-		this.listaProdutos = produtos;
-	}
-
-	public EntityManager getEntityManager() {
-		return entityManager;
-	}
-
-	public void setEntityManager(EntityManager entityManager) {
-		this.entityManager = entityManager;
+	
+	public void setProduto(Produtos produto) {
+		this.produto = produto;
 	}
 
 	public Produtos getProduto() {
 		return produto;
 	}
+	
+	public void setListaProdutos(List<Produtos> listaProdutos) {
+		this.listaProdutos = listaProdutos;
+	}
 
-	public void setProduto(Produtos produto) {
-		this.produto = produto;
+	public List<Produtos> getListaProdutos() {
+		if(listaProdutos == null){
+			listaProdutos = produtoDao.listarProduto();
+		}
+		return listaProdutos;
+	}
+
+	public String getCaminhoRelativo(String nomeImagem) {
+		return UploadImageUtil.getCaminho(nomeImagem);
 	}
 
 	public Part getImagem() {
@@ -85,26 +73,22 @@ public class ProdutosMb {
 		if (validaCamposVazios()) {
 			imagemAntiga = produto.getImagem();
 			produto.setImagem(UploadImageUtil.copiar(imagem, imagemAntiga));
-			entityManager.merge(produto);
-			addMessage("Produto salvo com sucesso!");
-			produto = new Produtos();
+			produtoDao.salvar(getProduto());
 		}
 		return "listarprodutos";
 	}
 
 	public String editar(Long ID) {
-		produto = entityManager.find(Produtos.class, ID);
-
+		produto = produtoDao.buscarPorId(ID);
 		return "formcadprodutos";
 	}
 
 	public String excluir(Long ID) {
-		Produtos produtos = entityManager.find(Produtos.class, ID);
-		entityManager.remove(produtos);
-		produtos = null;
+		produto = produtoDao.excluirProdutoPorId(ID);
+		addMessage("Produto deletado com sucesso!");
 		return "listarprodutos";
 	}
-
+	
 	public void buttonAction(ActionEvent actionEvent) {
 		addMessage("Mensagem do button Action!");
 	}

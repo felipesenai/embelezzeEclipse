@@ -15,11 +15,11 @@ import javax.persistence.EntityManagerFactory;
 import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ClienteDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 
-public class DBUnitTest extends DBTestCase {
+public class DBUnitTest<T> extends DBTestCase {
 	
 	private EntityManager entityManager;
 	private EntityManagerFactory entityManagerFactory;
-	private ClienteDao dao;
+	private T dao;
 	
 	
 	public DBUnitTest(){
@@ -45,7 +45,7 @@ public class DBUnitTest extends DBTestCase {
 		Util.iniciarPersistenceUnit();
 		entityManager = Util.createEntityManager();
 		entityManager.getTransaction().begin();
-		dao = new ClienteDao(entityManager);
+		dao = new T();
 	}
 	
 	public void close(){

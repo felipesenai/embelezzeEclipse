@@ -11,13 +11,12 @@
 
 	<ui:define name="content">
 		<div class="container_listaProdutos">
-			<ui:repeat var="p" value="#{produtoMb.produtos}">
-
+			<ui:repeat var="p" value="#{produtosMb.listaProdutos}">
 				<div class="row"
 					style="width: 170px; float: left; margin-left: 40px; padding-top: 40px">
 					<h:graphicImage styleClass="img-responsive"
 						rendered="#{!empty p.imagem}"
-						value="#{produtoMb.getCaminhoRelativo(p.imagem)}" />
+						value="#{produtosMb.getCaminhoRelativo(p.imagem)}" />
 					<br />
 					<h:outputText value="#{p.nomeProduto}" />
 					<br />
@@ -29,9 +28,6 @@
 					<br />
 				</div>
 			</ui:repeat>
-
-
-
 		</div>
 	</ui:define>
 </ui:composition>

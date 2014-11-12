@@ -45,7 +45,7 @@ public class ProdutoDaoTest {
 	public void begin(){
 		entityManager = Util.getEntityManager();
 		entityManager.getTransaction().begin();
-		dao = new ProdutoDao(entityManager);
+		dao = new ProdutoDao();
 	}
 	
 	@After

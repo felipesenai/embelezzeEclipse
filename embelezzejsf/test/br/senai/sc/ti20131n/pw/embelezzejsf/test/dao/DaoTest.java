@@ -30,14 +30,14 @@ public class DaoTest extends DBUnitTest{
 	
 	@Test
 	public void testeClienteDao(){
-		ClienteDao dao = new ClienteDao(entityManager);
+		ClienteDao dao = new ClienteDao();
 		assertNotNull("O objeto de acesso a dados do cliente está nulo", dao);
 		dao = null;
 	}
 	
 	@Test
 	public void testeProduto(){
-		ProdutoDao dao = new ProdutoDao(entityManager);
+		ProdutoDao dao = new ProdutoDao();
 		assertNotNull("O obejto de aceso a dados do produto está nulo", dao);
 	}
 	

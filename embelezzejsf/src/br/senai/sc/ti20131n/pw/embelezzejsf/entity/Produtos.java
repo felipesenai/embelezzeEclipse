@@ -10,7 +10,7 @@ public class Produtos {
 	
 	@Id
 	@GeneratedValue
-	private Long ID = null;
+	private Long ID;
 	private String marcaProduto;
 	private Double precoProduto;
 	private String nomeProduto;

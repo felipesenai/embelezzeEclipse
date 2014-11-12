@@ -11,14 +11,14 @@
 	<ui:define name="content">
 
 		<div class="corpo">
-			<div class="container_listaProdutos">
+			<div class="container_paginaListaProdutos">
 				<h1>
 					Lista <small>Produtos</small>
 				</h1>
 				<br />
 				<h:form>
-					<p:dataTable value="#{produtoMb.produtos}" var="p" rows="10"
-						paginator="true"
+					<p:dataTable value="#{produtosMb.listaProdutos}" var="listProduto"
+						rows="10" paginator="true"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="5,10,15">
 						<f:facet name="header">
@@ -29,48 +29,34 @@
 									placeholder="Informe o nome" />
 							</p:outputPanel>
 						</f:facet>
-
-						<p:column>
-							<f:facet name="header">Cód</f:facet>
-							<h:outputText value="#{p.ID}" />
+						<p:column headerText="ID">
+							<h:outputText value="#{listProduto.ID}" />
 						</p:column>
-
-						<p:column>
-							<f:facet name="header">Nome</f:facet>
-							<h:outputText value="#{p.nomeProduto}" />
+						<p:column headerText="Nome">
+							<h:outputText value="#{listProduto.nomeProduto}" />
 						</p:column>
-
-						<p:column>
-							<f:facet name="header">Marca</f:facet>
-							<h:outputText value="#{p.marcaProduto}" />
+						<p:column headerText="Marca">
+							<h:outputText value="#{listProduto.marcaProduto}" />
 						</p:column>
-
-						<p:column>
-							<f:facet name="header">Preço</f:facet>
-							<h:outputText value="#{p.precoProduto}" />
+						<p:column headerText="Preço">
+							<h:outputText value="#{listProduto.precoProduto}" />
 						</p:column>
-
-						<p:column>
-							<f:facet name="header">Imagem</f:facet>
-							<h:outputText value="#{p.imagem}" />
+						<p:column headerText="Imagem">
+							<h:outputText value="#{listProduto.imagem}" />
 						</p:column>
 						<p:column>
 							<f:facet name="header" />
-							<p:commandLink action="#{produtoMb.editar(p.ID)}"
+							<p:commandLink action="#{produtosMb.editar(listProduto.ID)}"
 								styleClass="btn">
 								<span class="glyphicon glyphicon-pencil"></span>
 							</p:commandLink>
-							<p:commandLink action="#{produtoMb.excluir(p.ID)}"
+							<p:commandLink action="#{produtosMb.excluir(listProduto.ID)}"
 								styleClass="btn">
 								<span class="glyphicon glyphicon-trash"></span>
 							</p:commandLink>
 						</p:column>
 					</p:dataTable>
 				</h:form>
-				<h:panelGrid rendered="#{empty produtoMb.produtos}">
-		Sem registros
-		</h:panelGrid>
-
 			</div>
 		</div>
 	</ui:define>

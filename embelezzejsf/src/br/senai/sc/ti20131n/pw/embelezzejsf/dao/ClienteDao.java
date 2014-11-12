@@ -4,19 +4,20 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
+import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 
 public class ClienteDao {
-	
-	private static EntityManager entityManager;
 
-	
-	public ClienteDao(){
-		this.entityManager = entityManager;
+	private EntityManager entityManager;
+
+	public ClienteDao() {
+		entityManager = Util.getEntityManager();
 	}
-	
-	public boolean salvar(Cliente cliente){
+
+	public boolean salvar(Cliente cliente) {
 		try {
 			entityManager.merge(cliente);
 			return true;
@@ -25,27 +26,23 @@ public class ClienteDao {
 			return false;
 		}
 	}
-	
-	public Cliente buscarPorId(Long ID){
-		try {
-			return entityManager.find(Cliente.class, ID);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+
+	public Cliente buscarPorId(Long ID) {
+		return entityManager.find(Cliente.class, ID);
 	}
-	
-	public void excluirClientePorId(Long l){
+
+	public Cliente excluirClientePorId(Long l) {
 		Cliente cliente = entityManager.getReference(Cliente.class, l);
 		entityManager.remove(cliente);
+		return cliente;
 	}
-	
-	public void atualizar(Cliente cliente){
+
+	public void atualizar(Cliente cliente) {
 		entityManager.merge(cliente);
 	}
-	
-	public List<Cliente> listarClientePorNome(String nome){
-		Query query = entityManager.createQuery("From Cliente",Cliente.class);
+
+	public List<Cliente> listarCliente() {
+		Query query = entityManager.createQuery("From Cliente", Cliente.class);
 		return query.getResultList();
 	}
 

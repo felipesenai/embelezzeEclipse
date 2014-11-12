@@ -134,6 +134,17 @@ body {
 	margin-bottom: 5%;
 }
 
+.container_agenda {
+	width: 100%;
+	height: 640px;
+	background-color: #FFFFFF; /* BRANCO */
+	box-shadow: 2px 2px 20px #888;	
+	padding-top: 20px;
+	padding-bottom: 20px;
+	float: left;
+	margin-bottom: 5%;
+}
+
 .container_cadClientes{
 	width: 100%;
 	height: 700px;
@@ -195,7 +206,19 @@ body {
 	margin-bottom: 5px;
 }
 
-.container_listaProdutos{
+.container_listaProdutos {
+	width: 100%;
+	height: 1000px;
+	background-color: #FFFFFF; /* BRANCO */
+	box-shadow: 2px 2px 20px #888;	
+	padding-top: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 30px;
+	margin-bottom: 5px;
+}
+
+.container_paginaListaProdutos {
 	width: 100%;
 	height: 100%;
 	background-color: #FFFFFF; /* BRANCO */

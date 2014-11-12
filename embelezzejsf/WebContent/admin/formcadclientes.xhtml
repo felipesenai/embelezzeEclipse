@@ -26,18 +26,17 @@
 				<div class="col-md-12">
 					<h:form role="form" id="formulario">
 						<div class="cadClientesColuna1">
-							<h:inputHidden value="#{clienteMb.cliente.ID}" />
-							<h:panelGroup rendered="#{not empty clienteMb.cliente.ID}">
+
+							<h:panelGroup rendered="#{!empty clienteMb.cliente.ID},#{empty clienteMb.cliente.ID}">
 								<div class="form-group">
 									<h:outputLabel value="Código" />
 									<h:inputText readonly="true" value="#{clienteMb.cliente.ID}"
 										styleClass="form-control" />
 								</div>
 							</h:panelGroup>
-							<!-- <h:inputHidden value="#{clienteMb.cliente.ID}" /> -->
-
+							<h:inputHidden value="#{clienteMb.cliente.ID}" />
 							<div class="form-group">
-								<h:outputLabel value="Nome:" />
+								<h:outputLabel value="*Nome:" />
 								<h:inputText id="NomeCliente" value="#{clienteMb.cliente.nome}"
 									type="text" class="form-control" placeholder="Nome" />
 							</div>
@@ -49,9 +48,9 @@
 							</div>
 
 							<div class="form-group">
-								<h:outputLabel value="CPF:" />
+								<h:outputLabel value="*CPF:" />
 								<h:inputText value="#{clienteMb.cliente.CPF}" type="text"
-									id="cpf" class="form-control" placeholder="   .   .   -  " />
+									id="cpf" class="form-control" placeholder="CPF" />
 							</div>
 							<div class="form-group">
 								<h:outputLabel value="Telefone:" />
@@ -126,12 +125,13 @@
 							</div>
 						</div>
 						<div class="botaoSalvar">
-							<h:messages></h:messages>
+			 				<h:messages></h:messages>
 							<p:growl id="growl" life="3000" />
 							<p:commandButton action="#{clienteMb.salvar}"
 								styleClass="btn btn-default" value="Salvar" id="ajax"
-								update="growl, formulario" />
+								update="formulario" />
 						</div>
+						<h:outputLabel value="*Campos obrigatórios"/>
 					</h:form>
 				</div>
 			</div>

@@ -7,37 +7,27 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.swing.JOptionPane;
-
-import apple.laf.JRSUIConstants.ShowArrows;
 import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ClienteDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
-import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
+import javax.faces.application.FacesMessage;
+import org.primefaces.event.CloseEvent;
 
 @ManagedBean
 public class ClienteMb {
 
 	private Cliente cliente;
 	private ClienteDao clienteDao;
-	private EntityManager entityManager;
 	private List<Cliente> listaClientes;
 
 	@PostConstruct
 	public void init() {
-		// setCliente(new Cliente());
-		// clienteDao = new ClienteDao(entityManager);
-		// entityManager = Util.getEntityManager();
 		cliente = new Cliente();
 		clienteDao = new ClienteDao();
 	}
 
 	public List<Cliente> getListaClientes() {
 		if (listaClientes == null) {
-			Query query = entityManager.createQuery("SELECT c FROM Cliente c",
-					Cliente.class);
-			listaClientes = query.getResultList();
+			listaClientes = clienteDao.listarCliente();
 		}
 		return listaClientes;
 	}
@@ -54,24 +44,44 @@ public class ClienteMb {
 		this.cliente = cliente;
 	}
 
+	// public String salvar() {
+	// if (validaCamposVazios()) {
+	// clienteDao.salvar(cliente);
+	// addMessage("Cliente salvo com sucesso!");
+	// cliente = new Cliente();
+	// }
+	// return "";
+	// }
+
 	public String salvar() {
-			if (validaCamposVazios()) {
-				System.out.println(cliente.getID());
-				clienteDao.salvar(getCliente());
-				addMessage("Cliente salvo com sucesso!");
+		if (validaCamposVazios()) {
+			clienteDao.salvar(cliente);
+			if (cliente.getID() == null || cliente.getID() == 0) {
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO,
+								"Cliente salvo com sucesso!", null));
 				cliente = new Cliente();
+			} else {
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO,
+								"Cliente alterado com sucesso!", null));
+
+				return "listagemClientes";
 			}
-			return "";
+		}
+		return "";
 	}
 
 	public String editar(Long ID) {
-		cliente = entityManager.find(Cliente.class, ID);
+		cliente = clienteDao.buscarPorId(ID);
 		return "formcadclientes";
 	}
 
 	public String excluir(Long ID) {
-		Cliente cliente = entityManager.getReference(Cliente.class, ID);
-		entityManager.remove(cliente);
+		cliente = clienteDao.buscarPorId(ID);
+		cliente = clienteDao.excluirClientePorId(ID);
 		listaClientes = null;
 		return "listagemClientes";
 	}
@@ -88,10 +98,16 @@ public class ClienteMb {
 
 	public boolean validaCamposVazios() {
 		if (cliente.getNome().isEmpty()) {
-			addMessage("Nome está vazio");
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Preencha os campos obrigatórios - NOME", null));
 			return false;
 		} else if (cliente.getCPF().isEmpty()) {
-			addMessage("CPF está vazio");
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Preencha os campos obrigatórios - CPF", null));
 			return false;
 		}
 		return true;

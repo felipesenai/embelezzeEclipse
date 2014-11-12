@@ -21,14 +21,18 @@ import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ClienteDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 
-public class ClienteDaoTest {
+public class ClienteDaoTest extends DBUnitTest<ClienteDao>{
+	
+	public ClienteDaoTest(){
+		super();
+	}
 			
 			public EntityManagerFactory entityManagerFactory = Persistence
 					.createEntityManagerFactory("embelezze_pu");
 			
 			public EntityManager entityManager = entityManagerFactory.createEntityManager();
 			
-			public ClienteDao dao = new ClienteDao(entityManager);
+			public ClienteDao dao = new ClienteDao();
 			
 			public Cliente cliente = new Cliente();
 			
@@ -46,7 +50,7 @@ public class ClienteDaoTest {
 			public void begin(){
 				entityManager = Util.getEntityManager();
 				entityManager.getTransaction().begin();
-				dao = new ClienteDao(entityManager);
+				dao = new ClienteDao();
 			}
 			
 			@After
