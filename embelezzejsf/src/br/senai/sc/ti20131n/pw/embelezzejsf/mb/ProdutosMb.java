@@ -85,7 +85,7 @@ public class ProdutosMb {
 
 	public String excluir(Long ID) {
 		produto = produtoDao.excluirProdutoPorId(ID);
-		addMessage("Produto deletado com sucesso!");
+		produto = null;
 		return "listarprodutos";
 	}
 	

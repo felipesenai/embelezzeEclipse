@@ -9,8 +9,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ClienteDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
-import javax.faces.application.FacesMessage;
-import org.primefaces.event.CloseEvent;
 
 @ManagedBean
 public class ClienteMb {
@@ -43,15 +41,6 @@ public class ClienteMb {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
-	// public String salvar() {
-	// if (validaCamposVazios()) {
-	// clienteDao.salvar(cliente);
-	// addMessage("Cliente salvo com sucesso!");
-	// cliente = new Cliente();
-	// }
-	// return "";
-	// }
 
 	public String salvar() {
 		if (validaCamposVazios()) {

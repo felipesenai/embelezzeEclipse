@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import sun.invoke.empty.Empty;
-
 @Entity
 public class Cliente {
 	

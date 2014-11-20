@@ -2,15 +2,20 @@ package br.senai.sc.ti20131n.pw.embelezzejsf.mb;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.swing.JOptionPane;
 
+import org.primefaces.event.ScheduleEntryMoveEvent;
+import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
@@ -64,7 +69,7 @@ public class EventoBean implements Serializable {
 	}
 
 	@PostConstruct
-	public void inicializar() {
+	public void inicializar(){
 
 		eventoDao = new EventoDao();
 		evento = new Evento();
@@ -88,7 +93,20 @@ public class EventoBean implements Serializable {
 			evt.setDescription(e.getDescricao());
 			evt.setAllDay(true);
 			evt.setEditable(true);
-
+			
+			if(e.isStatus()) {
+				evt.setStyleClass("classe1");
+			} else {
+				evt.setStyleClass("classe2");				
+			}
+			
+			
+			
+			Date now = new Date();
+			if(now.after(evt.getEndDate())){
+				evt.setStyleClass("classe3");				
+			}
+			
 			eventoModel.addEvent(evt);
 		}
 
@@ -107,17 +125,19 @@ public class EventoBean implements Serializable {
 	}
 
 	public void novoEvento(SelectEvent selectEvent) {
-		ScheduleEvent event = new DefaultScheduleEvent("",
-				(Date) selectEvent.getObject(), (Date) selectEvent.getObject());
+//		ScheduleEvent event = new DefaultScheduleEvent("",
+//				(Date) selectEvent.getObject(), (Date) selectEvent.getObject());
 		evento = new Evento();
-		evento.setInicio(new java.sql.Date(event.getStartDate().getTime()));
-		evento.setFim(new java.sql.Date(event.getEndDate().getTime()));
+//		evento.setInicio(new java.sql.Date(event.getStartDate().getTime()));
+//		evento.setFim(new java.sql.Date(event.getEndDate().getTime()));
+		evento.setInicio(new Date());
+		evento.setFim(new Date());
 
 	}
 
-	public void salvar() {
+	public void salvar() throws ParseException {
 		if (evento.getId() == null) {
-			if (evento.getInicio().getTime() >= evento.getFim().getTime()) {
+			if (evento.getInicio().getTime() <= evento.getFim().getTime()) {
 				eventoDao = new EventoDao();
 				try {
 					eventoDao.salvar(evento);
@@ -148,4 +168,43 @@ public class EventoBean implements Serializable {
 			}
 		}
 	}
+	
+	public void mover(ScheduleEntryMoveEvent event) {  
+        for(Evento e : listaEventos){
+            if(e.getId() == (Long)event.getScheduleEvent().getData()){	
+                evento = e;
+                eventoDao = new EventoDao();
+                try {
+                	eventoDao.atualizar(evento);
+                	inicializar();
+				} catch (SQLException ex) {
+					FacesContext.getCurrentInstance().addMessage(null, 
+							new FacesMessage( FacesMessage.SEVERITY_ERROR,
+									"Erro ao mover evento!",
+									"Erro: " + ex.getMessage()));
+				}
+                break;
+            }
+        }
+    }  
+	
+	public void redimensionar(ScheduleEntryResizeEvent event) {  
+		for(Evento e : listaEventos){
+			if(e.getId() == (Long)event.getScheduleEvent().getData()){	
+				evento = e;
+				eventoDao = new EventoDao();
+				try {
+					eventoDao.atualizar(evento);
+					inicializar();
+				} catch (SQLException ex) {
+					FacesContext.getCurrentInstance().addMessage(null, 
+							new FacesMessage( FacesMessage.SEVERITY_ERROR,
+									"Erro ao redimensionar evento!",
+									"Erro: " + ex.getMessage()));
+				}
+				break;
+			}
+		}
+	}  
+	
 }
