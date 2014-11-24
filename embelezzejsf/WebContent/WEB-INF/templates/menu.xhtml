@@ -19,9 +19,9 @@
 
 		<h:panelGroup rendered="#{loginAdmMb.estaLogado()}">
 			<ul id="menu_administrador" class="nav nav-pills navbar-right">
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> <span
-						class="glyphicon glyphicon-lock"></span> Admin <span class="caret"></span>
+				<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
+					<span class="glyphicon glyphicon-lock" /> Admin <span class="caret" />
 				</a>
 					<ul class="dropdown-menu" role="menu">
 						<li><h:link outcome="/admin/formcadclientes"
@@ -35,7 +35,7 @@
 						<h:panelGroup rendered="#{loginAdmMb.estaLogado()}">
 							<h:form>
 								<li><h:commandLink value="Sair"
-										action="#{loginAdmMb.fechar()}" /></li>
+										action="#{loginAdmMb.sair()}" /></li>
 							</h:form>
 						</h:panelGroup>
 					</ul></li>
@@ -45,8 +45,9 @@
 		<h:panelGroup rendered="#{not loginAdmMb.estaLogado()}">
 			<ul id="menu_administrador" class="nav nav-pills navbar-right">
 				<li>
-					<button type="button" class="btn btn-primary" data-toggle="modal"
-						data-target=".bs-example-modal-sm">Login</button>
+					<!-- <button type="button" class="btn btn-primary" data-toggle="modal"
+						data-target=".bs-example-modal-sm">Login</button> -->
+					<li><h:link outcome="/login" value="Login" /></li>	
 				</li>
 			</ul>
 
@@ -66,21 +67,10 @@
 										<h:outputLabel value="Senha" />
 										<h:inputSecret styleClass="form-control"
 											value="#{loginAdmMb.admForm.senha}" />
-									</div>
-									<p:commandButton value="Entrar" actionListener="#{loginAdmMb.autenticar}" oncomplete="handleLoginRequest(xhr, status, args)" />
+									</div> 
+									<h:commandButton styleClass="btn btn-default" value="Entrar" action="#{loginAdmMb.autenticar}" />
 									<button type="reset" class="btn btn-default">Limpar</button>
 								</h:form>
-								<script type="text/javascript">
-								    function handleLoginRequest(xhr, status, args) {
-								        if(args.validationFailed || !args.loggedIn) {
-								            PF('dlg').jq.effect("shake", {times:5}, 100);
-								        }
-								        else {
-								            PF('dlg').hide();
-								            $('#loginLink').fadeOut();
-								        }
-								    }
-								</script>
 							</div>
 						</div>
 					</div>

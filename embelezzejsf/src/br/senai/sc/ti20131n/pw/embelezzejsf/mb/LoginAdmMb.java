@@ -5,10 +5,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import org.primefaces.context.RequestContext;
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.LoginAdm;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 
@@ -40,42 +38,19 @@ public class LoginAdmMb {
 							admForm.getSenha())) {
 				admLogado = loginBanco; 
 				
-				return "admin/listagemClientes.xhtml?faces-redirect=true";
+				return "admin/index?faces-redirect=true";
 
 			}
 		} catch (Exception e) {
 			System.out.println("Usuário ou senha não encontrados");
 		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuário ou senha incorretos!"));
-		return "";
+		return "/index?faces-redirect=true";
 	}
 	
-	public void login(ActionEvent event) {
-		Query query = getEntityManager().createQuery(
-				" SELECT a FROM LoginAdm a WHERE a.login = ?", LoginAdm.class);
-		query.setParameter(1, getAdmForm().getLogin());
-        RequestContext context = RequestContext.getCurrentInstance();
-        FacesMessage message = null;
-        boolean admLogado = false;
-        LoginAdm loginBanco = (LoginAdm) query.getSingleResult();
-         
-        if(loginBanco.getLogin().equalsIgnoreCase(admForm.getLogin()) && loginBanco.getSenha().equalsIgnoreCase(
-				admForm.getSenha())) {
-        	admLogado = true;
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome ", loginBanco.getLogin());
-        } else {
-        	admLogado = false;
-            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials");
-        }
-         
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        context.addCallbackParam("loggedIn", admLogado);
-    }
-
-	
-	public String fechar(){
+	public String sair(){
 		admLogado = null;
-		return "/index.xhtml?faces-redirect=true";
+		return "/index?faces-redirect=true";
 	}
 	
 	public boolean estaLogado(){

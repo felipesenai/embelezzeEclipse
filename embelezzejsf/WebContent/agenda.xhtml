@@ -10,42 +10,39 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Agenda</title>
 
-<style type="text/css">
-	html,body {
-		margin: 0px;
-		padding: 5px;
-		font-family: arial;
-		font-size: 12pt;
-		background: #f5f5f5;
-	}
-	
-	.corpo {
-		padding: 10px;
-		height: 350px;
-	}
-	
-	.global .fc-event-skin {
-		background: #006600 !important;
-	}
-	
-	.pessoal .fc-event-skin {
-		background: #003399 !important;
-	}
-	
-	.classe1 .fc-event-inner{
-		background: blue;
-	}
+	<style type="text/css">
+html,body {
+	margin: 0px;
+	padding: 5px;
+	font-family: arial;
+	font-size: 12pt;
+	background: #f5f5f5;
+}
 
-	.classe2 .fc-event-inner{
-		background: green;		
-	}
+.corpo {
+	padding: 10px;
+	height: 350px;
+}
 
-	.classe3 .fc-event-inner{
-		background: red;
-	}
+.global .fc-event-skin {
+	background: #006600 !important;
+}
 
-	
-	
+.pessoal .fc-event-skin {
+	background: #003399 !important;
+}
+
+.classe1 .fc-event-inner {
+	background: green;
+}
+
+.classe2 .fc-event-inner {
+	background: #6CA6CD;
+}
+
+.classe3 .fc-event-inner {
+	background: #FF7256;
+}
 </style>
 	<script type="text/javascript">
 		PrimeFaces.locales['pt'] = {
@@ -94,8 +91,10 @@
 					update="eventoDetalhe" oncomplete="PF('caixaDialog').show();" />
 				<p:ajax event="dateSelect" listener="#{eventoBean.novoEvento}"
 					update="eventoDetalhe" oncomplete="PF('caixaDialog').show();" />
-				<p:ajax event="eventMove" listener="#{eventoBean.mover}" update="schEvento" />
-				<p:ajax event="eventResize" listener="#{eventoBean.redimensionar}" update="schEvento" />
+				<p:ajax event="eventMove" listener="#{eventoBean.mover}"
+					update="schEvento" />
+				<p:ajax event="eventResize" listener="#{eventoBean.redimensionar}"
+					update="schEvento" />
 			</p:schedule>
 
 			<p:dialog widgetVar="caixaDialog" header="Evento" resizable="false"
@@ -128,40 +127,45 @@
 				</p:outputPanel>
 			</p:dialog>
 		</h:form>
-						<h:form>            
-    <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
-        <p:graphicImage name="#{resource['img/empresa.png']}" />
-    </h:outputLink>
- 
-    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
- 
-    <p:dialog header="Login" widgetVar="dlg" resizable="false">
-        <h:panelGrid columns="2" cellpadding="5">
-            <h:outputLabel for="username" value="Username:" />
-            <p:inputText id="username" value="#{userLoginView.username}" required="true" label="username" />
- 
-            <h:outputLabel for="password" value="Password:" />
-            <p:password id="password" value="#{userLoginView.password}" required="true" label="password" />
- 
-            <f:facet name="footer">
-                <p:commandButton value="Login" update="growl" actionListener="#{userLoginView.login}"
-                                 oncomplete="handleLoginRequest(xhr, status, args)" />
-            </f:facet>  
-        </h:panelGrid>
-    </p:dialog>
-</h:form>
- 
-<script type="text/javascript">
-    function handleLoginRequest(xhr, status, args) {
-        if(args.validationFailed || !args.loggedIn) {
-            PF('dlg').jq.effect("shake", {times:10}, 500);
-        }
-        else {
-            PF('dlg').hide();
-            $('#loginLink').fadeOut();
-        }
-    }
-</script>
+		<h:form>
+			<h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();"
+				title="login">
+				<p:graphicImage name="#{resource['img/empresa.png']}" />
+			</h:outputLink>
+
+			<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+			<p:dialog header="Login" widgetVar="dlg" resizable="false">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="username" value="Username:" />
+					<p:inputText id="username" value="#{userLoginView.username}"
+						required="true" label="username" />
+
+					<h:outputLabel for="password" value="Password:" />
+					<p:password id="password" value="#{userLoginView.password}"
+						required="true" label="password" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Login" update="growl"
+							actionListener="#{userLoginView.login}"
+							oncomplete="handleLoginRequest(xhr, status, args)" />
+					</f:facet>
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+
+		<script type="text/javascript">
+			function handleLoginRequest(xhr, status, args) {
+				if (args.validationFailed || !args.loggedIn) {
+					PF('dlg').jq.effect("shake", {
+						times : 50
+					}, 5000);
+				} else {
+					PF('dlg').hide();
+					$('#loginLink').fadeOut();
+				}
+			}
+		</script>
 	</div>
 </h:body>
 </html>

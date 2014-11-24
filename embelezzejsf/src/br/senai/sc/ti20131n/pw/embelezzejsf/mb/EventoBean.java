@@ -125,13 +125,13 @@ public class EventoBean implements Serializable {
 	}
 
 	public void novoEvento(SelectEvent selectEvent) {
-//		ScheduleEvent event = new DefaultScheduleEvent("",
-//				(Date) selectEvent.getObject(), (Date) selectEvent.getObject());
+		ScheduleEvent event = new DefaultScheduleEvent("",
+				(Date) selectEvent.getObject(), (Date) selectEvent.getObject());
 		evento = new Evento();
-//		evento.setInicio(new java.sql.Date(event.getStartDate().getTime()));
-//		evento.setFim(new java.sql.Date(event.getEndDate().getTime()));
-		evento.setInicio(new Date());
-		evento.setFim(new Date());
+		evento.setInicio(new java.sql.Date(event.getStartDate().getTime()));
+		evento.setFim(new java.sql.Date(event.getEndDate().getTime()));
+//		evento.setInicio(new Date());
+//		evento.setFim(new Date());
 
 	}
 

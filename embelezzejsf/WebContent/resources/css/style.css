@@ -48,6 +48,19 @@ body {
 	margin-bottom: 5%;
 }
 
+.container_login {
+	width: 100%;
+	height: 100%;
+	background-color: #FFFFFF; /* BRANCO */
+	box-shadow: 2px 2px 20px #888;	
+	padding-top: 40px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 30px;
+	float: left;
+	margin-bottom: 5%;
+}
+
 .container_empresa {
 	width: 100%;
 	height: 600px;
