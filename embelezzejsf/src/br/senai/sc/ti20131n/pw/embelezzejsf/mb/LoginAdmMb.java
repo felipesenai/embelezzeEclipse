@@ -5,8 +5,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.LoginAdm;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 
@@ -37,15 +39,16 @@ public class LoginAdmMb {
 					&& loginBanco.getSenha().equalsIgnoreCase(
 							admForm.getSenha())) {
 				admLogado = loginBanco; 
-				
-				return "admin/index?faces-redirect=true";
-
-			}
+				return "/index?faces-redirect=true";
+			}	
 		} catch (Exception e) {
 			System.out.println("Usuário ou senha não encontrados");
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuário ou senha incorretos!"));
-		return "/index?faces-redirect=true";
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Login ou senha inválidos!", null));
+		return "";
 	}
 	
 	public String sair(){
@@ -73,4 +76,14 @@ public class LoginAdmMb {
 		this.admForm = admForm;
 	}
 
+	public void buttonAction(ActionEvent actionEvent) {
+		addMessage("Cliente salvo com sucesso!");
+	}
+
+	public void addMessage(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				summary, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+	
 }

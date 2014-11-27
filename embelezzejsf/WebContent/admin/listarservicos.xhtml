@@ -13,7 +13,7 @@
 		<div class="corpo">
 			<div class="container_listaProdutos">
 				<h1>
-					Lista <small>Produtos</small>
+					Lista <small>Serviços</small>
 				</h1>
 
 				<br />
@@ -21,42 +21,42 @@
 				<h:form>
 				<p:dataTable id="dataTable" rows="10" paginator="true"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-						rowsPerPageTemplate="5,10,15" value="#{produtoMb.produtos}" var="p"
+						rowsPerPageTemplate="5,10,15" value="#{servicoMb.servicos}" var="s"
 						styleClass="table">
 
 						<p:column headerText="ID">
-							<h:outputText value="#{p.ID}" />
+							<h:outputText value="#{s.ID}" />
 						</p:column>
 						
-						<p:column headerText="Nome Produto">
-							<h:outputText value="#{p.nomeProduto}" />
+						<p:column headerText="Nome Serviço">
+							<h:outputText value="#{s.nomeServico}" />
 						</p:column>
 						
-						<p:column headerText="Marca">
-							<h:outputText value="#{p.marcaProduto}" />
+						<p:column headerText="Descrição">
+							<h:outputText value="#{s.descricaoServico}" />
 						</p:column>
 					
 						<p:column headerText="Preço">
-							<h:outputText value="#{p.precoProduto}" />
+							<h:outputText value="#{s.precoServico}" />
 						</p:column>
 						
 						<p:column headerText="Imagem">
-							<h:outputText value="#{p.imagem}" />
+							<h:outputText value="#{s.imagemServico}" />
 						</p:column>
 						
 						<h:column>
 							<f:facet name="header">Imagem</f:facet>
-							<h:outputText value="#{p.imagem}" />
+							<h:outputText value="#{s.imagemServico}" />
 						</h:column>
 						
 						<p:column>
 							<f:facet name="header" />
-							<h:commandLink action="#{produtoMb.editar(p.ID)}"
+							<h:commandLink action="#{servicoMb.editar(s.ID)}"
 								styleClass="btn">
 								<span class="glyphicon glyphicon-pencil"></span>
 							</h:commandLink>
-							<h:commandLink action="#{produtoMb.excluir(p.ID)}"
-							onclick="if(!confirm('Deseja realmente deletar esse produto?')) return false;"
+							<h:commandLink action="#{servicoMb.excluir(s.ID)}"
+							onclick="if(!confirm('Deseja realmente deletar esse serviço?')) return false;"
 								styleClass="btn" update="dataTable">
 								<span class="glyphicon glyphicon-trash"></span>
 							</h:commandLink>
@@ -65,7 +65,7 @@
 
 					</p:dataTable>
 				</h:form>
-				<h:panelGrid rendered="#{empty produtoMb.produto}">
+				<h:panelGrid rendered="#{empty servicoMb.servicos}">
 					Sem registros
 				</h:panelGrid>
 

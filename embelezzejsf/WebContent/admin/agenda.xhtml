@@ -43,6 +43,13 @@ html,body {
 .classe3 .fc-event-inner {
 	background: #FF7256;
 }
+
+.data-hora {
+	float: left;
+	color: red;
+	margin-bottom: 20px;
+}
+
 </style>
 	<script type="text/javascript">
 		PrimeFaces.locales['pt'] = {
@@ -81,6 +88,11 @@ html,body {
 <h:body>
 	<div class="corpo">
 		<h1 id="page-header">Agenda Embelezze</h1>
+		<div class="data-hora">
+			<h:form>
+				<p:clock pattern="dd/MM/yy - HH:mm:ss" mode="server" />
+			</h:form>
+		</div>
 
 		<h:form>
 			<p:growl id="msgGrowl" showDetail="true" />
@@ -98,8 +110,13 @@ html,body {
 			</p:schedule>
 
 			<p:dialog widgetVar="caixaDialog" header="Evento" resizable="false"
-				modal="true" showEffect="clip" hideEffect="explode">
+				modal="true" showEffect="explode" hideEffect="bounce">
 				<p:outputPanel id="eventoDetalhe">
+					<p:panelGrid columns="1">
+						<h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
+							<p:commandButton value="Selecionar Cliente"/>
+						</h:outputLink>
+					</p:panelGrid>	
 					<p:panelGrid columns="2">
 						<p:outputLabel value="Título" />
 						<p:inputText value="#{eventoBean.evento.titulo}" required="true" />
@@ -116,7 +133,8 @@ html,body {
 						<p:selectBooleanCheckbox value="#{eventoBean.evento.status}" />
 
 						<p:outputLabel value="Descrição" />
-						<p:inputTextarea value="#{eventoBean.evento.descricao}" />
+						<p:inputTextarea value="#{eventoBean.evento.descricao}" rows="5" cols="30" counter="display" maxlength="100" counterTemplate="{0} caracteres restantes" autoResize="false" />
+    					<h:outputText id="display" />
 
 					</p:panelGrid>
 
@@ -124,15 +142,11 @@ html,body {
 					<p:commandButton value="Salvar"
 						actionListener="#{eventoBean.salvar}" update="msgGrowl schEvento"
 						oncomplete="PF('caixaDialog').hide();" />
+					<p:commandButton value="Cancelar" oncomplete="PF('caixaDialog').hide();" />
 				</p:outputPanel>
 			</p:dialog>
 		</h:form>
 		<h:form>
-			<h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();"
-				title="login">
-				<p:graphicImage name="#{resource['img/empresa.png']}" />
-			</h:outputLink>
-
 			<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
 
 			<p:dialog header="Login" widgetVar="dlg" resizable="false">

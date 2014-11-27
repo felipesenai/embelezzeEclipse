@@ -9,7 +9,7 @@
 
 <ui:composition template="../WEB-INF/templates/base.xhtml">
 	<ui:define name="content">
-
+  <h:outputScript library="js" name="cadastroClienteMask.js" ></h:outputScript>
 		<div class="corpo">
 			<div class="container_cadClientes">
 				<h:panelGrid rendered="#{empty clienteMb.cliente.ID}">
@@ -27,7 +27,8 @@
 					<h:form role="form" id="formulario">
 						<div class="cadClientesColuna1">
 
-							<h:panelGroup rendered="#{!empty clienteMb.cliente.ID},#{empty clienteMb.cliente.ID}">
+							<h:panelGroup
+								rendered="#{!empty clienteMb.cliente.ID},#{empty clienteMb.cliente.ID}">
 								<div class="form-group">
 									<h:outputLabel value="Código" />
 									<h:inputText readonly="true" value="#{clienteMb.cliente.ID}"
@@ -43,26 +44,26 @@
 
 							<div class="form-group">
 								<h:outputLabel value="E-mail:" />
-								<h:inputText value="#{clienteMb.cliente.email}" type="email"
-									class="form-control" placeholder="Email" />
+ 								<h:inputText value="#{clienteMb.cliente.email}" type="email"
+									class="form-control"/>
 							</div>
 
 							<div class="form-group">
 								<h:outputLabel value="*CPF:" />
 								<h:inputText value="#{clienteMb.cliente.CPF}" type="text"
-									id="cpf" class="form-control" placeholder="CPF" />
+									id="cpf" class="form-control cpf" placeholder="CPF" />
 							</div>
 							<div class="form-group">
 								<h:outputLabel value="Telefone:" />
 								<h:inputText value="#{clienteMb.cliente.telefone}"
-									styleClass="form-control"  />
+									styleClass="form-control telefone" />
 							</div>
+
 							<div class="form-group">
 								<h:outputLabel value="Celular:" />
 								<h:inputText value="#{clienteMb.cliente.celular}"
-									styleClass="form-control" />
+									styleClass="form-control celular" />
 							</div>
-
 							<div class="form-group">
 								<h:outputLabel value="Rua:" />
 								<h:inputText value="#{clienteMb.cliente.rua}"
@@ -74,7 +75,7 @@
 							<div class="form-group">
 								<h:outputLabel value="Numero:" />
 								<h:inputText value="#{clienteMb.cliente.numero}"
-									styleClass="form-control" />
+									styleClass="form-control numero" />
 							</div>
 							<div class="form-group">
 								<h:outputLabel value="Bairro:" />
@@ -84,7 +85,7 @@
 							<div class="form-group">
 								<h:outputLabel value="CEP:" />
 								<h:inputText value="#{clienteMb.cliente.CEP}"
-									styleClass="form-control" />
+									styleClass="form-control cep" />
 							</div>
 							<div class="form-group">
 								<h:outputLabel value="Cidade:" />
@@ -125,13 +126,13 @@
 							</div>
 						</div>
 						<div class="botaoSalvar">
-			 				<h:messages></h:messages>
+							<h:messages></h:messages>
 							<p:growl id="growl" life="3000" />
 							<p:commandButton action="#{clienteMb.salvar}"
 								styleClass="btn btn-default" value="Salvar" id="ajax"
 								update="formulario" />
 						</div>
-						<h:outputLabel value="*Campos obrigatórios"/>
+						<h:outputLabel value="*Campos obrigatórios" />
 					</h:form>
 				</div>
 			</div>

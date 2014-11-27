@@ -23,6 +23,7 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import br.senai.sc.ti20131n.pw.embelezzejsf.dao.EventoDao;
+import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
 import br.senai.sc.ti20131n.pw.embelezzejsf.modelo.Evento;
 
 @ManagedBean
@@ -128,6 +129,7 @@ public class EventoBean implements Serializable {
 		ScheduleEvent event = new DefaultScheduleEvent("",
 				(Date) selectEvent.getObject(), (Date) selectEvent.getObject());
 		evento = new Evento();
+		Cliente c = new Cliente();
 		evento.setInicio(new java.sql.Date(event.getStartDate().getTime()));
 		evento.setFim(new java.sql.Date(event.getEndDate().getTime()));
 //		evento.setInicio(new Date());

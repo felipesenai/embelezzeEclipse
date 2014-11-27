@@ -11,7 +11,7 @@
 		<li><h:link outcome="/produtos" value="Produtos" /></li>
 
 		<h:panelGroup rendered="#{loginAdmMb.estaLogado()}">
-			<li><h:link outcome="/agenda" value="Agenda" /></li>
+			<li><h:link outcome="/admin/agenda" value="Agenda" /></li>
 		</h:panelGroup>
 
 		<li><h:link outcome="/contato" value="Contato" /></li>
@@ -32,6 +32,10 @@
 								value="Cadastrar Produtos" /></li>
 						<li><h:link outcome="/admin/listarprodutos"
 								value="Listar Produtos" /></li>
+						<li><h:link outcome="/admin/formcadservicos"
+								value="Cadastrar Serviços" /></li>
+						<li><h:link outcome="/admin/listarservicos"
+								value="Listar Serviços" /></li>
 						<h:panelGroup rendered="#{loginAdmMb.estaLogado()}">
 							<h:form>
 								<li><h:commandLink value="Sair"

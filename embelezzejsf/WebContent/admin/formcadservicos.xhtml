@@ -9,57 +9,56 @@
 
 <ui:composition template="../WEB-INF/templates/base.xhtml">
 	<ui:define name="content">
-	<h:outputScript library="js" name="cadastroClienteMask.js"></h:outputScript>
 		<div class="corpo">
 			<div class="container_cadProdutos">
 				<h:form role="form" enctype="multipart/form-data" id="formulario">
 					<div class="cadProdutosColuna1">
-						<h:panelGrid rendered="#{empty produtoMb.produto.ID}">
+						<h:panelGrid rendered="#{empty servicoMb.servico.ID}">
 							<h1>
-								Cadastro <small>Produto</small>
+								Cadastro <small>Serviço</small>
 							</h1>
 						</h:panelGrid>
-						<h:panelGrid rendered="#{!empty produtoMb.produto.ID}">
+						<h:panelGrid rendered="#{!empty servicoMb.servico.ID}">
 							<h1>
-								Edição <small>Produto</small>
+								Edição <small>Serviço</small>
 							</h1>
 						</h:panelGrid>
 
-						<h:inputHidden value="#{produtoMb.produto.ID}" />
+						<h:inputHidden value="#{servicoMb.servico.ID}" />
 						<br />
 						<div class="form-group">
-							<h:outputLabel value="Nome do produto:" />
+							<h:outputLabel value="Nome do servico:" />
 							<h:inputText styleClass="form-control"
-								value="#{produtoMb.produto.nomeProduto}" />
+								value="#{servicoMb.servico.nomeServico}" />
 						</div>
 						<br />
 						<div class="form-group">
 							<h:outputLabel value="Valor:" />
 							<h:inputText styleClass="form-control"
-								value="#{produtoMb.produto.precoProduto}" />
+								value="#{servicoMb.servico.precoServico}" />
 						</div>
 						<br />
 						<div class="form-group">
-							<h:outputLabel value="Marca:" />
+							<h:outputLabel value="Descrição:" />
 							<h:inputTextarea styleClass="form-control"
-								value="#{produtoMb.produto.marcaProduto}" />
+								value="#{servicoMb.servico.descricaoServico}" />
 							<div class="form-group">
 								<br />
 
 								<h:outputLabel value="Imagem: " />
-								<h:inputFile value="#{produtoMb.imagem}">
+								<h:inputFile value="#{servicoMb.imagem}">
 									<f:validator validatorId="validator.ImagemValidator" />
 								</h:inputFile>
 								<br />
-								<h:inputHidden value="#{produtoMb.produto.imagem}" />
+								<h:inputHidden value="#{servicoMb.servico.imagemServico}" />
 								<h:graphicImage styleClass="img-responsive"
-									rendered="#{!empty produtoMb.produto.imagem}"
-									value="#{produtoMb.getCaminhoRelativo(produtoMb.produto.imagem)}" />
+									rendered="#{!empty servicoMb.servico.imagemServico}"
+									value="#{servicoMb.getCaminhoRelativo(servicoMb.servico.imagemServico)}" />
 								<br />
 
 							</div>
 						</div>
-						<h:commandButton value="Salvar" action="#{produtoMb.salvar}"
+						<h:commandButton value="Salvar" action="#{servicoMb.salvar}"
 							styleClass="btn btn-default" />
 
 					</div>

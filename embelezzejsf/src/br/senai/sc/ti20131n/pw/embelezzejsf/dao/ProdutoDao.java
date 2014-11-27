@@ -29,10 +29,9 @@ public class ProdutoDao {
 		return entityManager.find(Produtos.class, ID);
 	}
 
-	public Produtos excluirProdutoPorId(Long l) {
+	public void excluirProdutoPorId(Long l) {
 		Produtos produto = entityManager.getReference(Produtos.class, l);
 		entityManager.remove(produto);
-		return produto;
 	}
 
 	public void atualizar(Produtos produto) {
@@ -40,7 +39,17 @@ public class ProdutoDao {
 	}
 
 	public List<Produtos> listarProduto() {
-		Query query = entityManager.createQuery("From Produtos", Produtos.class);
+
+		Query query = entityManager
+				.createQuery("From Produtos", Produtos.class);
 		return query.getResultList();
+	}
+
+	public Produtos ListarDetalhes(Long idproduto) {
+		// Produtos produto=entityManager.getReference(Produtos.class, ID);
+		Produtos produto = entityManager.find(Produtos.class, idproduto);
+
+		return produto;
+
 	}
 }

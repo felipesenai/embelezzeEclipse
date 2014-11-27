@@ -87,16 +87,12 @@ public class ClienteMb {
 
 	public boolean validaCamposVazios() {
 		if (cliente.getNome().isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Preencha os campos obrigatórios - NOME", null));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Preencha os campos obrigatórios - NOME"));
 			return false;
 		} else if (cliente.getCPF().isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Preencha os campos obrigatórios - CPF", null));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Preencha os campos obrigatórios - CPF"));
 			return false;
 		}
 		return true;

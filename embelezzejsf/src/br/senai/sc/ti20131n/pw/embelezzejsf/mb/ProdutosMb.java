@@ -14,43 +14,55 @@ import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ProdutoDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Produtos;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.UploadImageUtil;
 
-@ManagedBean
+@ManagedBean(name = "produtoMb")
 public class ProdutosMb {
-	
-	private Produtos produto;
-
 	private List<Produtos> listaProdutos;
-	private ProdutoDao produtoDao;
+	private Produtos produto;
 	private Part imagem;
 	private String imagemAntiga;
+	private long idProduto;
+	private ProdutoDao produtoDao;
+	private long ID;
+
+	public long getIdProduto() {
+		return idProduto;
+	}
+
+	public void setIdProduto(long idProduto) {
+		this.idProduto = idProduto;
+	}
+
 
 	@PostConstruct
 	private void init() {
 		produto = new Produtos();
 		produtoDao = new ProdutoDao();
+		produto = new Produtos();
+		//entityManager = Util.getEntityManager();
 	}
-	
-	public void setProduto(Produtos produto) {
-		this.produto = produto;
+
+	public String getCaminhoRelativo(String nomeImagem) {
+		return UploadImageUtil.getCaminho(nomeImagem);
+	}
+
+	public List<Produtos> getProdutos() {
+		if (listaProdutos == null) {
+			listaProdutos = produtoDao.listarProduto();
+		}
+		return listaProdutos;
+
+	}
+
+	public void setProdutos(List<Produtos> produtos) {
+		this.listaProdutos = produtos;
 	}
 
 	public Produtos getProduto() {
 		return produto;
 	}
-	
-	public void setListaProdutos(List<Produtos> listaProdutos) {
-		this.listaProdutos = listaProdutos;
-	}
 
-	public List<Produtos> getListaProdutos() {
-		if(listaProdutos == null){
-			listaProdutos = produtoDao.listarProduto();
-		}
-		return listaProdutos;
-	}
-
-	public String getCaminhoRelativo(String nomeImagem) {
-		return UploadImageUtil.getCaminho(nomeImagem);
+	public void setProduto(Produtos produto) {
+		this.produto = produto;
 	}
 
 	public Part getImagem() {
@@ -70,11 +82,10 @@ public class ProdutosMb {
 	}
 
 	public String salvar() throws IOException {
-		if (validaCamposVazios()) {
-			imagemAntiga = produto.getImagem();
-			produto.setImagem(UploadImageUtil.copiar(imagem, imagemAntiga));
-			produtoDao.salvar(getProduto());
-		}
+		imagemAntiga = produto.getImagem();
+		produto.setImagem(UploadImageUtil.copiar(imagem, imagemAntiga));
+		// entityManager.merge(produto);
+		produtoDao.salvar(getProduto());
 		return "listarprodutos";
 	}
 
@@ -84,30 +95,26 @@ public class ProdutosMb {
 	}
 
 	public String excluir(Long ID) {
-		produto = produtoDao.excluirProdutoPorId(ID);
-		produto = null;
+		produto = produtoDao.buscarPorId(ID);
+		produtoDao.excluirProdutoPorId(ID);
+		listaProdutos = null;
+
 		return "listarprodutos";
 	}
-	
-	public void buttonAction(ActionEvent actionEvent) {
-		addMessage("Mensagem do button Action!");
+
+	public long getID() {
+		return ID;
 	}
 
-	public void addMessage(String summary) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				summary, null);
-		FacesContext.getCurrentInstance().addMessage(null, message);
+	public void setID(long iD) {
+		this.ID = iD;
 	}
 
-	public boolean validaCamposVazios() {
-		if (produto.getNomeProduto().isEmpty()) {
-			addMessage("O nome do produto está vazio");
-			return false;
-		} else if (produto.getMarcaProduto().isEmpty()) {
-			addMessage("A marca do produto está vazia");
-			return false;
-		}
-		return true;
+	public void abreDetalhes() {
+		// produto = produtoDao.buscarPorId(ID);
+		// produto = produtoDao.ListarDetalhes(getID());
+		// produto = entityManager.find(Produtos.class, idProduto);
+
 	}
 
 }
