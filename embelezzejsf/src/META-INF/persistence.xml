@@ -4,6 +4,10 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="embelezze_pu" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente</class>
+		<class>br.senai.sc.ti20131n.pw.embelezzejsf.entity.LoginAdm</class>
+		<class>br.senai.sc.ti20131n.pw.embelezzejsf.entity.Produtos</class>
+		<class>br.senai.sc.ti20131n.pw.embelezzejsf.entity.Servico</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

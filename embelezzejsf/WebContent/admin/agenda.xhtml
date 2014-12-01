@@ -50,6 +50,9 @@ html,body {
 	margin-bottom: 20px;
 }
 
+.selecionaClie{
+	width: 50%;
+}
 </style>
 	<script type="text/javascript">
 		PrimeFaces.locales['pt'] = {
@@ -113,11 +116,15 @@ html,body {
 				modal="true" showEffect="explode" hideEffect="bounce">
 				<p:outputPanel id="eventoDetalhe">
 					<p:panelGrid columns="1">
-						<h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
-							<p:commandButton value="Selecionar Cliente"/>
+						<h:outputLink value="javascript:void(0)"
+							onclick="PF('dlg').show();" title="Selecione um Cliente">
+							<p:commandButton value="Selecionar Cliente" icon="ui-icon-search"/>
 						</h:outputLink>
-					</p:panelGrid>	
+					</p:panelGrid>
 					<p:panelGrid columns="2">
+						<p:outputLabel value="Cliente" />
+						<p:inputText value="#{eventoBean.evento.titulo}" required="true" />
+
 						<p:outputLabel value="Título" />
 						<p:inputText value="#{eventoBean.evento.titulo}" required="true" />
 
@@ -133,8 +140,10 @@ html,body {
 						<p:selectBooleanCheckbox value="#{eventoBean.evento.status}" />
 
 						<p:outputLabel value="Descrição" />
-						<p:inputTextarea value="#{eventoBean.evento.descricao}" rows="5" cols="30" counter="display" maxlength="100" counterTemplate="{0} caracteres restantes" autoResize="false" />
-    					<h:outputText id="display" />
+						<p:inputTextarea value="#{eventoBean.evento.descricao}" rows="5"
+							cols="30" counter="display" maxlength="100"
+							counterTemplate="{0} caracteres restantes" autoResize="false" />
+						<h:outputText id="display" />
 
 					</p:panelGrid>
 
@@ -142,44 +151,44 @@ html,body {
 					<p:commandButton value="Salvar"
 						actionListener="#{eventoBean.salvar}" update="msgGrowl schEvento"
 						oncomplete="PF('caixaDialog').hide();" />
-					<p:commandButton value="Cancelar" oncomplete="PF('caixaDialog').hide();" />
+					<p:commandButton value="Cancelar"
+						oncomplete="PF('caixaDialog').hide();" />
 				</p:outputPanel>
 			</p:dialog>
 		</h:form>
-		<h:form>
-			<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-
-			<p:dialog header="Login" widgetVar="dlg" resizable="false">
-				<h:panelGrid columns="2" cellpadding="5">
-					<h:outputLabel for="username" value="Username:" />
-					<p:inputText id="username" value="#{userLoginView.username}"
-						required="true" label="username" />
-
-					<h:outputLabel for="password" value="Password:" />
-					<p:password id="password" value="#{userLoginView.password}"
-						required="true" label="password" />
-
-					<f:facet name="footer">
-						<p:commandButton value="Login" update="growl"
-							actionListener="#{userLoginView.login}"
-							oncomplete="handleLoginRequest(xhr, status, args)" />
-					</f:facet>
+		<div class="selecionaCliente">
+			<h:form id="form">
+				<p:growl id="growl" sticky="true" showDetail="true" />
+				<h:panelGrid>
+					<p:dialog header="Selecione um Cliente" widgetVar="dlg" resizable="false">
+						<p:dataTable id="radioDT" var="c" value="#{clienteMb.listaClientes}" selection="#{eventoBean.listaClientes}" rowKey="#{c.ID}" tableStyle="width:1200px"
+						rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+						rowsPerPageTemplate="5,10,15">
+							<p:column selectionMode="single" style="width:16px;text-align:center" />
+							<p:column headerText="Nome">
+								<h:outputText value="#{c.nome}" />
+							</p:column>
+							<p:column headerText="CPF">
+								<h:outputText value="#{c.CPF}" />
+							</p:column>
+							<p:column headerText="Email">
+								<h:outputText value="#{c.email}" />
+							</p:column>
+							<p:column headerText="Telefone">
+								<h:outputText value="#{c.telefone}" />
+							</p:column>
+							<p:column headerText="Celular">
+								<h:outputText value="#{c.celular}" />
+							</p:column>
+							<f:facet name="footer">
+								<p:commandButton process="radioDT" update=":form" value="Selecionar" oncomplete="PF('carDialog').show()"></p:commandButton>
+								<p:commandButton value="Cancelar" update=":form" onclick="PF('radioDT').hide();" />
+							</f:facet>
+						</p:dataTable>
+					</p:dialog>
 				</h:panelGrid>
-			</p:dialog>
-		</h:form>
-
-		<script type="text/javascript">
-			function handleLoginRequest(xhr, status, args) {
-				if (args.validationFailed || !args.loggedIn) {
-					PF('dlg').jq.effect("shake", {
-						times : 50
-					}, 5000);
-				} else {
-					PF('dlg').hide();
-					$('#loginLink').fadeOut();
-				}
-			}
-		</script>
+			</h:form>
+		</div>
 	</div>
 </h:body>
 </html>

@@ -38,25 +38,28 @@ public class LoginAdmMb {
 			if (loginBanco.getLogin().equalsIgnoreCase(admForm.getLogin())
 					&& loginBanco.getSenha().equalsIgnoreCase(
 							admForm.getSenha())) {
-				admLogado = loginBanco; 
+				admLogado = loginBanco;
 				return "/index?faces-redirect=true";
-			}	
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Usuário ou senha inválidos!"));
+				return "";
+			}
+			
 		} catch (Exception e) {
-			System.out.println("Usuário ou senha não encontrados");
+			System.out.println("Usuário ou senha inválidos!");
 		}
-		FacesContext.getCurrentInstance().addMessage(
-				null,
-				new FacesMessage(FacesMessage.SEVERITY_ERROR,
-						"Login ou senha inválidos!", null));
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage("Usuário ou senha inválidos!"));
 		return "";
 	}
-	
-	public String sair(){
+
+	public String sair() {
 		admLogado = null;
 		return "/index?faces-redirect=true";
 	}
-	
-	public boolean estaLogado(){
+
+	public boolean estaLogado() {
 		return (admLogado != null);
 	}
 
@@ -76,14 +79,4 @@ public class LoginAdmMb {
 		this.admForm = admForm;
 	}
 
-	public void buttonAction(ActionEvent actionEvent) {
-		addMessage("Cliente salvo com sucesso!");
-	}
-
-	public void addMessage(String summary) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				summary, null);
-		FacesContext.getCurrentInstance().addMessage(null, message);
-	}
-	
 }

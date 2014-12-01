@@ -36,6 +36,26 @@ public class EventoBean implements Serializable {
 	private ScheduleModel eventoModel;
 	private List<Evento> listaEventos;
 	private EventoDao eventoDao;
+	private List<Cliente> listaClientes;
+	private Cliente clienteSelecionado;
+
+	
+	
+	public List<Cliente> getListaClientes() {
+		return listaClientes;
+	}
+
+	public void setListaClientes(List<Cliente> listaClientes) {
+		this.listaClientes = listaClientes;
+	}
+
+	public Cliente getClienteSelecionado() {
+		return clienteSelecionado;
+	}
+
+	public void setClienteSelecionado(Cliente clienteSelecionado) {
+		this.clienteSelecionado = clienteSelecionado;
+	}
 
 	public Evento getEvento() {
 		return evento;

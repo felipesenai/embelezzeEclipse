@@ -4,8 +4,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import br.senai.sc.ti20131n.pw.embelezzejsf.modelo.Evento;
 
 @Entity
 public class Cliente {
@@ -26,6 +30,8 @@ public class Cliente {
 	private String email;
 	private String telefone;
 	private String celular;
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="cliente")
+	private List<Evento> listaEvento;
 	
 	public Long getID() {
 		return ID;
