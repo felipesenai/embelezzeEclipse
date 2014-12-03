@@ -27,7 +27,7 @@
   </context-param>
   <context-param>
     <param-name>senha</param-name>
-    <param-value>rita1821</param-value>
+    <param-value>***</param-value>
   </context-param>
   <context-param>
     <param-name>tls</param-name>

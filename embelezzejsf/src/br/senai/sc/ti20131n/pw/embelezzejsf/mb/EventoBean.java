@@ -121,8 +121,6 @@ public class EventoBean implements Serializable {
 				evt.setStyleClass("classe2");				
 			}
 			
-			
-			
 			Date now = new Date();
 			if(now.after(evt.getEndDate())){
 				evt.setStyleClass("classe3");				
@@ -140,6 +138,7 @@ public class EventoBean implements Serializable {
 		for (Evento e : listaEventos) {
 			if (e.getId() == (Long) event.getData()) {
 				evento = e;
+				setClienteSelecionado(evento.getCliente());
 				break;
 			}
 		}
@@ -150,6 +149,7 @@ public class EventoBean implements Serializable {
 				(Date) selectEvent.getObject(), (Date) selectEvent.getObject());
 		evento = new Evento();
 		Cliente c = new Cliente();
+		setClienteSelecionado(null);
 		evento.setInicio(new java.sql.Date(event.getStartDate().getTime()));
 		evento.setFim(new java.sql.Date(event.getEndDate().getTime()));
 //		evento.setInicio(new Date());
@@ -162,7 +162,9 @@ public class EventoBean implements Serializable {
 			if (evento.getInicio().getTime() <= evento.getFim().getTime()) {
 				eventoDao = new EventoDao();
 				try {
+					evento.setCliente(getClienteSelecionado());
 					eventoDao.salvar(evento);
+					setClienteSelecionado(null);
 					inicializar();
 				} catch (SQLException e) {
 					FacesContext.getCurrentInstance().addMessage(null, 
@@ -180,7 +182,9 @@ public class EventoBean implements Serializable {
 			}
 		} else {
 			try {
+				evento.setCliente(getClienteSelecionado());
 				eventoDao.atualizar(evento);
+				setClienteSelecionado(null);
 				inicializar();
 			} catch (Exception e) {
 				FacesContext .getCurrentInstance() .addMessage(null, 

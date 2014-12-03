@@ -16,13 +16,24 @@ public class ClienteMb {
 	private Cliente cliente;
 	private ClienteDao clienteDao;
 	private List<Cliente> listaClientes;
+	private List<Cliente> clientesFiltrados;
 
+	
 	@PostConstruct
 	public void init() {
 		cliente = new Cliente();
 		clienteDao = new ClienteDao();
 	}
 
+	
+	public List<Cliente> getClientesFiltrados() {
+		return clientesFiltrados;
+	}
+	
+	public void setClientesFiltrados(List<Cliente> clientesFiltrados) {
+		this.clientesFiltrados = clientesFiltrados;
+	}
+	
 	public List<Cliente> getListaClientes() {
 		if (listaClientes == null) {
 			listaClientes = clienteDao.listarCliente();
@@ -51,6 +62,8 @@ public class ClienteMb {
 						new FacesMessage(FacesMessage.SEVERITY_INFO,
 								"Cliente salvo com sucesso!", null));
 				cliente = new Cliente();
+				return "listagemClientes";
+				
 			} else {
 				FacesContext.getCurrentInstance().addMessage(
 						null,

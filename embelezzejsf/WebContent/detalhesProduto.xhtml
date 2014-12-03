@@ -1,0 +1,50 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="WEB-INF/templates/base.xhtml">
+	<ui:define name="content">
+		<div class="corpo">
+			<div class="container_listaProdutos">
+				<h1>
+					Detalhes <small>Produtos</small>
+				</h1>
+				<br />
+				<f:metadata>
+					<f:viewParam name="idProdu" value="#{produtoMb.idProduto}" />
+					<f:event type="preRenderView" listener="#{produtoMb.abreDetalhes}" />
+				</f:metadata>
+				<div>
+					<h1>
+						<h:outputLabel value="#{produtoMb.produto.nomeProduto}" />
+					</h1>
+				</div>
+				<div class="detalhe_produto">
+					<h:graphicImage styleClass="img-responsive"
+						rendered="#{!empty produtoMb.produto.imagem}"
+						value="#{produtoMb.getCaminhoRelativo(produtoMb.produto.imagem)}" />
+				</div>
+				<h3>
+					<h:outputLabel value="Valor: "/> <h:outputLabel value="#{produtoMb.produto.precoProduto}" />
+				</h3>
+				
+				<br />
+				<h3>
+					<h:outputLabel value="Marca: " />
+				</h3>
+				<h4>
+					<h:outputLabel value="#{produtoMb.produto.marcaProduto}" />
+				</h4>
+
+				<br />
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>
+</html>

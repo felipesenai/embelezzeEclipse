@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
 import br.senai.sc.ti20131n.pw.embelezzejsf.modelo.Evento;
 
 public class EventoDao {
@@ -16,8 +17,8 @@ public class EventoDao {
 	private Connection conexao;
 
 	public void salvar(Evento evento) throws SQLException {
-		String sql = "INSERT INTO Evento(Titulo, InicioEvento, FimEvento, DescEvento, StatusEvento) "
-				   + "VALUES(?,?,?,?,?)";
+		String sql = "INSERT INTO Evento(Titulo, InicioEvento, FimEvento, DescEvento, StatusEvento, cliente_ID)"
+				   + "VALUES(?,?,?,?,?,?)";
 		conexao = FabricaConexaoAgenda.conectar();
 		pstm = conexao.prepareStatement(sql);
 
@@ -28,26 +29,26 @@ public class EventoDao {
 		//pstm.setDate(3, new java.sql.Date(evento.getFim().getTime()));
 		pstm.setString(4, evento.getDescricao());
 		pstm.setBoolean(5, evento.isStatus());
+		pstm.setLong(6, evento.getCliente().getID());
 
 		pstm.executeUpdate();
 
 	}
 
 	public void atualizar(Evento evento) throws SQLException {
-		String sql = "UPDATE Evento SET Titulo=?, InicioEvento=?, FimEvento=?, DescEvento=?, StatusEvento=?"
-				   + " WHERE ID_Evento = ?";
+		String sql = "UPDATE Evento SET Titulo=?, InicioEvento=?, FimEvento=?, DescEvento=?, StatusEvento=?, cliente_ID=?"
+				   + " WHERE ID_Evento=?";
 
 		conexao = FabricaConexaoAgenda.conectar();
 		pstm = conexao.prepareStatement(sql);
 
 		pstm.setString(1, evento.getTitulo());
-//		pstm.setDate(2, new java.sql.Date(evento.getInicio().getTime()));
-//		pstm.setDate(3, new java.sql.Date(evento.getFim().getTime()));
 		pstm.setObject(2, evento.getInicio());
 		pstm.setObject(3, evento.getFim());
 		pstm.setString(4, evento.getDescricao());
 		pstm.setBoolean(5, evento.isStatus());
-		pstm.setLong(6, evento.getId());
+		pstm.setLong(6, evento.getCliente() != null ? evento.getCliente().getID():null);
+		pstm.setLong(7, evento.getId());
 
 		pstm.executeUpdate();
 
@@ -55,7 +56,7 @@ public class EventoDao {
 
 	public List<Evento> listarEventos() throws SQLException {
 		List<Evento> eventos = new ArrayList<Evento>();
-		String sql = "SELECT * FROM Evento";
+		String sql = "SELECT * FROM Evento e LEFT JOIN Cliente c on e.cliente_ID = c.ID";
 
 		conexao = FabricaConexaoAgenda.conectar();
 		pstm = conexao.prepareStatement(sql);
@@ -71,6 +72,10 @@ public class EventoDao {
 			e.setStatus(rs.getBoolean(5));
 			e.setDescricao(rs.getString(6));
 
+			Cliente c = new Cliente();
+			c.setID(rs.getLong(7));
+			c.setNome(rs.getString(11));
+			e.setCliente(c);
 			eventos.add(e);
 		}
 		return eventos;

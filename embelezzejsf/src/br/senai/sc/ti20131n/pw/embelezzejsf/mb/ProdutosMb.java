@@ -8,11 +8,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.persistence.EntityManager;
 import javax.servlet.http.Part;
 
 import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ProdutoDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Produtos;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.UploadImageUtil;
+import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 
 @ManagedBean(name = "produtoMb")
 public class ProdutosMb {
@@ -20,9 +22,10 @@ public class ProdutosMb {
 	private Produtos produto;
 	private Part imagem;
 	private String imagemAntiga;
-	private long idProduto;
 	private ProdutoDao produtoDao;
 	private long ID;
+	private EntityManager entityManager;
+	private long idProduto;
 
 	public long getIdProduto() {
 		return idProduto;
@@ -38,7 +41,7 @@ public class ProdutosMb {
 		produto = new Produtos();
 		produtoDao = new ProdutoDao();
 		produto = new Produtos();
-		//entityManager = Util.getEntityManager();
+		entityManager = Util.getEntityManager();
 	}
 
 	public String getCaminhoRelativo(String nomeImagem) {
@@ -113,7 +116,7 @@ public class ProdutosMb {
 	public void abreDetalhes() {
 		// produto = produtoDao.buscarPorId(ID);
 		// produto = produtoDao.ListarDetalhes(getID());
-		// produto = entityManager.find(Produtos.class, idProduto);
+		 produto = entityManager.find(Produtos.class, idProduto);
 
 	}
 

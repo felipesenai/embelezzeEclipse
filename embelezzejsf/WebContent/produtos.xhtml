@@ -10,12 +10,15 @@
 	<ui:define name="content">
 		<div class="corpo">
 			<div class="container_listaProdutos">
-				<ui:repeat var="p" value="#{produtosMb.listaProdutos}">
+				<ui:repeat var="p" value="#{produtoMb.produtos}">
 					<div class="row"
 						style="width: 170px; float: left; margin-left: 40px; padding-top: 40px">
-						<h:graphicImage styleClass="img-responsive"
-							rendered="#{!empty p.imagem}"
-							value="#{produtosMb.getCaminhoRelativo(p.imagem)}" />
+						<h:link outcome="detalhesProduto">
+							<h:graphicImage styleClass="img-responsive"
+								rendered="#{!empty p.imagem}"
+								value="#{produtoMb.getCaminhoRelativo(p.imagem)}" />
+							<f:param name="idProdu" value="#{p.ID}" />
+						</h:link>	
 						<br />
 						<h:outputText value="#{p.nomeProduto}" />
 						<br />

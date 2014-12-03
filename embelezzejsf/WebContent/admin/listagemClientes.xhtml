@@ -17,17 +17,18 @@
 				</h1>
 				<br />
 				<h:form>
-					<p:dataTable id="dataTable" value="#{clienteMb.listaClientes}"
-						var="listaCliente" rows="10" paginator="true"
+					<p:dataTable id="dataTable" value="#{clienteMb.listaClientes}" emptyMessage="Nenhum cliente encontrado"
+						var="listaCliente" rows="10" paginator="true" widgetVar="tabelaClientes"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-						rowsPerPageTemplate="5,10,15">
+						rowsPerPageTemplate="5,10,15" filteredValue="#{clienteMb.clientesFiltrados}" sortBy="#{listaCliente.ID}">
+
 						<p:column headerText="ID" style="width:60px; text-align: center">
 							<h:outputText value="#{listaCliente.ID}" />
 						</p:column>
 
-						<p:column headerText="Nome">
-							<h:outputText value="#{listaCliente.nome}" />
-						</p:column>
+				        <p:column filterBy="#{listaCliente.nome}" headerText="Nome">
+				            <h:outputText value="#{listaCliente.nome}"/>
+				        </p:column>
 
 						<p:column headerText="CPF" style="width:160px;">
 							<h:outputText value="#{listaCliente.CPF}" />

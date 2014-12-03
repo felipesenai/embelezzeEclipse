@@ -1,0 +1,39 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="WEB-INF/templates/base.xhtml">
+	<ui:define name="content">
+		<div class="corpo">
+			<div class="container_paginaListaProdutos">
+				<ui:repeat var="s" value="#{servicoMb.servicos}">
+				<div class="textoImagem">
+					<h:outputLabel value="Serviço: " />
+					<h:outputText value=" #{s.nomeServico}" />
+					<br />
+					<h:outputLabel value="Preco: " />
+					<h:outputText value=" R$  #{s.precoServico}" />
+					<br />
+					<h:outputLabel value="Descrição:" /> 
+					<br />
+					<h:outputText value="#{s.descricaoServico}" />
+					<br />
+				</div>	
+					<div class="row"
+						style="width: 800px; height: 800px; float: left; margin-left: 40px; padding-top: 40px">
+						<h:graphicImage styleClass="img-responsive"
+							rendered="#{!empty s.imagemServico}"
+							value="#{servicoMb.getCaminhoRelativo(s.imagemServico)}" />
+						<br />
+					</div>
+				</ui:repeat>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

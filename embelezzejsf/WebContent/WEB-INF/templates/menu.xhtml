@@ -9,6 +9,7 @@
 		<li><h:link outcome="/index" value="Home" /></li>
 		<li><h:link outcome="/empresa" value="Empresa" /></li>
 		<li><h:link outcome="/produtos" value="Produtos" /></li>
+		<li><h:link outcome="/servicos" value="Serviços" /></li>
 
 		<h:panelGroup rendered="#{loginAdmMb.estaLogado()}">
 			<li><h:link outcome="/admin/agenda" value="Agenda" /></li>
@@ -26,19 +27,25 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><h:link outcome="/admin/formcadclientes"
 								value="Cadastrar Clientes" /></li>
+						<li class="divider"></li>								
 						<li><h:link outcome="/admin/listagemClientes"
 								value="Listar Clientes" /></li>
+						<li class="divider"></li>		
 						<li><h:link outcome="/admin/formcadprodutos"
 								value="Cadastrar Produtos" /></li>
+						<li class="divider"></li>		
 						<li><h:link outcome="/admin/listarprodutos"
 								value="Listar Produtos" /></li>
+						<li class="divider"></li>		
 						<li><h:link outcome="/admin/formcadservicos"
 								value="Cadastrar Serviços" /></li>
+						<li class="divider"></li>		
 						<li><h:link outcome="/admin/listarservicos"
 								value="Listar Serviços" /></li>
+						<li class="divider"></li>		
 						<h:panelGroup rendered="#{loginAdmMb.estaLogado()}">
 							<h:form>
-								<li><h:commandLink value="Sair"
+								<li><h:commandButton style="float:right;" styleClass="btn btn-default" value="Sair"
 										action="#{loginAdmMb.sair()}" /></li>
 							</h:form>
 						</h:panelGroup>

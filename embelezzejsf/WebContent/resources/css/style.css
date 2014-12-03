@@ -108,6 +108,10 @@ body {
 	padding-right: 30px;
 }
 
+.detalhe_produto {
+	width: 50%;
+}
+
 .container_contato {
 	width: 100%;
 	height: 500px;
@@ -159,7 +163,7 @@ body {
 
 .container_cadClientes{
 	width: 100%;
-	height: 700px;
+	height: 650px;
 	background-color: #FFFFFF; /* BRANCO */
 	box-shadow: 2px 2px 20px #888;	
 	padding-top: 20px;
@@ -227,7 +231,8 @@ body {
 	padding-left: 30px;
 	padding-right: 30px;
 	padding-bottom: 30px;
-	margin-bottom: 5px;
+	margin-bottom: 30px;
+	float: left;
 }
 
 .container_paginaListaProdutos {
@@ -240,6 +245,19 @@ body {
 	padding-right: 30px;
 	padding-bottom: 30px;
 	margin-bottom: 5px;
+}
+
+.container_paginaListaProdutos {
+	width: 100%;
+	height: 100%;
+	background-color: #FFFFFF; /* BRANCO */
+	box-shadow: 2px 2px 20px #888;	
+	padding-top: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 30px;
+	margin-bottom: 5%;
+	float: left;
 }
 
 #NomeCliente{
@@ -264,3 +282,9 @@ body {
 	text-decoration: none;
 }
 
+.textoImagem {
+	margin-top: 40px;
+	margin-left: 40px; 
+	padding-top: 40px";
+	width: 40%;
+}
