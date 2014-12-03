@@ -24,7 +24,7 @@
 						rowsPerPageTemplate="5,10,15" value="#{servicoMb.servicos}" var="s"
 						styleClass="table">
 
-						<p:column headerText="ID">
+						<p:column headerText="ID" style="width:50px">
 							<h:outputText value="#{s.ID}" />
 						</p:column>
 						
@@ -33,7 +33,9 @@
 						</p:column>
 						
 						<p:column headerText="Descrição">
-							<h:outputText value="#{s.descricaoServico}" />
+							<div style="width:100%; height:80px; overflow-y:auto;">
+								<h:outputText value="#{s.descricaoServico}" />
+							</div>
 						</p:column>
 					
 						<p:column headerText="Preço">
@@ -49,7 +51,7 @@
 							<h:outputText value="#{s.imagemServico}" />
 						</h:column>
 						
-						<p:column>
+						<p:column style="width:120px">
 							<f:facet name="header" />
 							<h:commandLink action="#{servicoMb.editar(s.ID)}"
 								styleClass="btn">

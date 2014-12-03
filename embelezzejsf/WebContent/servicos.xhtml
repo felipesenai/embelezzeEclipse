@@ -10,28 +10,37 @@
 <ui:composition template="WEB-INF/templates/base.xhtml">
 	<ui:define name="content">
 		<div class="corpo">
-			<div class="container_paginaListaProdutos">
-				<ui:repeat var="s" value="#{servicoMb.servicos}">
-				<div class="textoImagem">
-					<h:outputLabel value="Serviço: " />
-					<h:outputText value=" #{s.nomeServico}" />
-					<br />
-					<h:outputLabel value="Preco: " />
-					<h:outputText value=" R$  #{s.precoServico}" />
-					<br />
-					<h:outputLabel value="Descrição:" /> 
-					<br />
-					<h:outputText value="#{s.descricaoServico}" />
-					<br />
-				</div>	
-					<div class="row"
-						style="width: 800px; height: 800px; float: left; margin-left: 40px; padding-top: 40px">
-						<h:graphicImage styleClass="img-responsive"
-							rendered="#{!empty s.imagemServico}"
-							value="#{servicoMb.getCaminhoRelativo(s.imagemServico)}" />
-						<br />
-					</div>
-				</ui:repeat>
+			<div class="container_paginaListaServicos">
+				<h1 style="margin-left: 30px;">SERVIÇOS</h1>
+				<br />
+				<hr></hr>
+				<div class="tabelaServico">
+					<ui:repeat var="s" value="#{servicoMb.servicos}">
+						<div style="width: 100%; margin-bottom: 10px; padding-bottom: 40px; border-bottom: solid 1px #CCC;">
+							<div class="imagem_servico" style="float:right; width: 380px;">
+								<div class="row">
+									<h:graphicImage styleClass="img-responsive" style="border-radius:50px"
+										rendered="#{!empty s.imagemServico}"
+										value="#{servicoMb.getCaminhoRelativo(s.imagemServico)}" />
+								</div>
+							</div>
+
+							<div class="textoImagem" style="float:left; margin-right: 10px; width: 580px">
+								<h3 id="tituloServico">
+									<h:outputText value=" #{s.nomeServico}" />
+								</h3>
+								<h4>Valor: <h:outputText  style="color:red	" value=" R$#{s.precoServico}" /> </h4>
+								<br />
+								<h4>Descrição do Serviço</h4>
+								<p id="descricaoServico">
+									<h:outputText value="#{s.descricaoServico}" />
+								</p>
+							</div>
+							<div style="clear:both">
+							</div>
+						</div>
+					</ui:repeat>
+				</div>
 			</div>
 		</div>
 	</ui:define>

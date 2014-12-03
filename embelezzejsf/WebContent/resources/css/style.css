@@ -108,6 +108,14 @@ body {
 	padding-right: 30px;
 }
 
+.imagem_servico {
+	float: right;
+	/*margin-top: 80px;*/
+	margin-left: 20px;	
+	padding-top: 30px;
+	padding-right: 30px;
+}
+
 .detalhe_produto {
 	width: 50%;
 }
@@ -260,6 +268,38 @@ body {
 	float: left;
 }
 
+.container_paginaListaServicos {
+	width: 100%;
+	height: 100%;
+	background-color: #FFFFFF; /* BRANCO */
+	box-shadow: 2px 2px 20px #888;	
+	padding-top: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 30px;
+	margin-bottom: 5%;
+	float: left;
+}
+
+.container_paginaListaServicos label{
+	color: #000000; /* PRETO */
+	font-size: 18px;
+}
+
+.tabelaServico {
+	margin: auto 20px; 
+}
+
+#descricaoServico{
+	text-align: justify;
+	/*width: 70%;*/
+}
+	
+#tituloServico{
+	color: #000000; /* PRETO */
+}	
+	
+
 #NomeCliente{
 	width: 200px;
 }
@@ -283,8 +323,13 @@ body {
 }
 
 .textoImagem {
-	margin-top: 40px;
-	margin-left: 40px; 
+	/*margin-top: 40px;*/
+	/*margin-left: 40px;*/ 
 	padding-top: 40px";
-	width: 40%;
+	width: 70%;
+}
+
+#nomeServico {
+	text-transform: uppercase;
+	color: red;
 }

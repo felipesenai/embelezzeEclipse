@@ -149,9 +149,16 @@ html,body {
 					</p:panelGrid>
 
 					<p:separator />
+					<h:panelGroup id="controleModal">
+						<h:panelGroup rendered="#{eventoBean.acaoRealizada}">
+						<script>
+							PF('caixaDialog').hide();
+						</script>	
+						</h:panelGroup>
+					</h:panelGroup>
+			
 					<p:commandButton value="Salvar"
-						actionListener="#{eventoBean.salvar}" update="msgGrowl schEvento :form:panelGrid"
-						oncomplete="PF('caixaDialog').hide();"/>
+						actionListener="#{eventoBean.salvar}" update="msgGrowl schEvento :form:panelGrid" />
 					<p:commandButton value="Cancelar"
 						oncomplete="PF('caixaDialog').hide();" />
 				</p:outputPanel>

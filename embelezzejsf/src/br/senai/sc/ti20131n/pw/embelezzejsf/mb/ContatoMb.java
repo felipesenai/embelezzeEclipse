@@ -40,6 +40,7 @@ public class ContatoMb {
 		
 		try {
 			EmailUtil.enviarEmail(email, "Contato via site.", mensagemText);
+			
 		} catch (AddressException e) {
 			e.printStackTrace();
 		} catch (MessagingException e) {

@@ -38,9 +38,18 @@ public class EventoBean implements Serializable {
 	private EventoDao eventoDao;
 	private List<Cliente> listaClientes;
 	private Cliente clienteSelecionado;
+	private boolean acaoRealizada = false;
 
 	
 	
+	public boolean isAcaoRealizada() {
+		return acaoRealizada;
+	}
+
+	public void setAcaoRealizada(boolean acaoRealizada) {
+		this.acaoRealizada = acaoRealizada;
+	}
+
 	public List<Cliente> getListaClientes() {
 		return listaClientes;
 	}
@@ -162,10 +171,20 @@ public class EventoBean implements Serializable {
 			if (evento.getInicio().getTime() <= evento.getFim().getTime()) {
 				eventoDao = new EventoDao();
 				try {
-					evento.setCliente(getClienteSelecionado());
-					eventoDao.salvar(evento);
-					setClienteSelecionado(null);
-					inicializar();
+					if(clienteSelecionado == null) {
+						FacesContext.getCurrentInstance().addMessage(null, 
+								new FacesMessage( FacesMessage.SEVERITY_WARN,
+										"Aviso!",
+										"Para criar um evento, primeiro você deve selecionar um cliente!"));
+						acaoRealizada = false;
+						return;
+					} else {
+						evento.setCliente(getClienteSelecionado());
+						eventoDao.salvar(evento);
+						setClienteSelecionado(null);
+						inicializar();
+						acaoRealizada = true;
+					}
 				} catch (SQLException e) {
 					FacesContext.getCurrentInstance().addMessage(null, 
 							new FacesMessage( FacesMessage.SEVERITY_ERROR,
