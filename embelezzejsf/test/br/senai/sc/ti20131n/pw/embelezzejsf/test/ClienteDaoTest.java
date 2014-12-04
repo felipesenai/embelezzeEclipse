@@ -1,13 +1,10 @@
 package br.senai.sc.ti20131n.pw.embelezzejsf.test;
 
-import java.sql.Date;
-import java.util.List;
+import static org.junit.Assert.*;
 
-import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -16,12 +13,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
 import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ClienteDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 
-public class ClienteDaoTest extends DBUnitTest<ClienteDao>{
+public class ClienteDaoTest extends DBUnitTestCliente{
 	
 	public ClienteDaoTest(){
 		super();
@@ -111,4 +107,5 @@ public class ClienteDaoTest extends DBUnitTest<ClienteDao>{
 				
 			}
 			
+
 }

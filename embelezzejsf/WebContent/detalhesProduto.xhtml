@@ -12,34 +12,30 @@
 		<div class="corpo">
 			<div class="container_listaProdutos">
 				<h1>
-					Detalhes <small>Produtos</small>
+					DETALHES DO PRODUTO
 				</h1>
 				<br />
 				<f:metadata>
 					<f:viewParam name="idProdu" value="#{produtoMb.idProduto}" />
 					<f:event type="preRenderView" listener="#{produtoMb.abreDetalhes}" />
 				</f:metadata>
+				<hr />
 				<div>
-					<h1>
-						<h:outputLabel value="#{produtoMb.produto.nomeProduto}" />
-					</h1>
+					<h2>
+						<h:outputText value="#{produtoMb.produto.nomeProduto}" />
+					</h2>
 				</div>
 				<div class="detalhe_produto">
 					<h:graphicImage styleClass="img-responsive"
 						rendered="#{!empty produtoMb.produto.imagem}"
 						value="#{produtoMb.getCaminhoRelativo(produtoMb.produto.imagem)}" />
 				</div>
-				<h3>
-					<h:outputLabel value="Valor: "/> <h:outputLabel value="#{produtoMb.produto.precoProduto}" />
+				<h3> 
+					Valor: <h:outputText value="R$#{produtoMb.produto.precoProduto}" style="color: red;" />
 				</h3>
-				
-				<br />
-				<h3>
-					<h:outputLabel value="Marca: " />
-				</h3>
-				<h4>
-					<h:outputLabel value="#{produtoMb.produto.marcaProduto}" />
-				</h4>
+				<h3> 
+					Marca: <h:outputText value="#{produtoMb.produto.marcaProduto}" />
+				</h3>	
 
 				<br />
 			</div>

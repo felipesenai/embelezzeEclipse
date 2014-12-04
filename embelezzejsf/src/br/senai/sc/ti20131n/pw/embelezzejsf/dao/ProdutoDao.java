@@ -14,6 +14,10 @@ public class ProdutoDao {
 	public ProdutoDao() {
 		entityManager = Util.getEntityManager();
 	}
+	
+	public ProdutoDao(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
 
 	public boolean salvar(Produtos produto) {
 		try {

@@ -1,7 +1,10 @@
 package br.senai.sc.ti20131n.pw.embelezzejsf.test.dao;
 
+import static org.junit.Assert.*;
+
 import javax.persistence.EntityManager;
 
+import org.dbunit.assertion.DbUnitAssert;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -10,10 +13,9 @@ import org.junit.experimental.theories.suppliers.TestedOn;
 
 import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ClienteDao;
 import br.senai.sc.ti20131n.pw.embelezzejsf.dao.ProdutoDao;
-import br.senai.sc.ti20131n.pw.embelezzejsf.test.DBUnitTest;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 
-public class DaoTest extends DBUnitTest{
+public class DaoTest extends DbUnitAssert{
 
 	private static EntityManager entityManager;
 	
@@ -40,6 +42,8 @@ public class DaoTest extends DBUnitTest{
 		ProdutoDao dao = new ProdutoDao();
 		assertNotNull("O obejto de aceso a dados do produto está nulo", dao);
 	}
+	
+	
 	
 	@AfterClass
 	public void close(){

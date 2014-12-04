@@ -7,15 +7,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Cliente;
 import br.senai.sc.ti20131n.pw.embelezzejsf.modelo.Evento;
+import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 
 public class EventoDao {
 
 	PreparedStatement pstm;
 	ResultSet rs;
 	private Connection conexao;
+	private EntityManager entityManager;
 
+	public EventoDao() {
+		entityManager = Util.getEntityManager();
+	}
+
+	public EventoDao(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+	
 	public void salvar(Evento evento) throws SQLException {
 		String sql = "INSERT INTO Evento(Titulo, InicioEvento, FimEvento, DescEvento, StatusEvento, cliente_ID)"
 				   + "VALUES(?,?,?,?,?,?)";

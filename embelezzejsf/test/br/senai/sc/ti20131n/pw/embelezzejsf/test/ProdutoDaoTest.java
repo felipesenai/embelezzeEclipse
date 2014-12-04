@@ -26,7 +26,7 @@ import br.senai.sc.ti20131n.pw.embelezzejsf.entity.Produtos;
 import br.senai.sc.ti20131n.pw.embelezzejsf.util.Util;
 
 
-public class ProdutoDaoTest {
+public class ProdutoDaoTest extends DBUnitTestProduto{
 
 	public static EntityManager entityManager;
 	private static ProdutoDao dao;

@@ -16,6 +16,10 @@ public class ClienteDao {
 		entityManager = Util.getEntityManager();
 	}
 
+	public ClienteDao(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+	
 	public boolean salvar(Cliente cliente) {
 		try {
 			entityManager.merge(cliente);

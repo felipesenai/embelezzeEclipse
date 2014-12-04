@@ -179,11 +179,11 @@ public class EventoBean implements Serializable {
 						acaoRealizada = false;
 						return;
 					} else {
+						acaoRealizada = true;
 						evento.setCliente(getClienteSelecionado());
 						eventoDao.salvar(evento);
 						setClienteSelecionado(null);
 						inicializar();
-						acaoRealizada = true;
 					}
 				} catch (SQLException e) {
 					FacesContext.getCurrentInstance().addMessage(null, 

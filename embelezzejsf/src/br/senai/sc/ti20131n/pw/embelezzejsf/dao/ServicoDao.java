@@ -13,6 +13,10 @@ public class ServicoDao {
 	public ServicoDao() {
 		entityManager = Util.getEntityManager();
 	}
+	
+	public ServicoDao(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
 
 	public boolean salvar(Servico servico) {
 		try {
