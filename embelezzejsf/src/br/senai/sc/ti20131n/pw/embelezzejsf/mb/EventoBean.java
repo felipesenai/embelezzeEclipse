@@ -39,64 +39,7 @@ public class EventoBean implements Serializable {
 	private List<Cliente> listaClientes;
 	private Cliente clienteSelecionado;
 	private boolean acaoRealizada = false;
-
-	
-	
-	public boolean isAcaoRealizada() {
-		return acaoRealizada;
-	}
-
-	public void setAcaoRealizada(boolean acaoRealizada) {
-		this.acaoRealizada = acaoRealizada;
-	}
-
-	public List<Cliente> getListaClientes() {
-		return listaClientes;
-	}
-
-	public void setListaClientes(List<Cliente> listaClientes) {
-		this.listaClientes = listaClientes;
-	}
-
-	public Cliente getClienteSelecionado() {
-		return clienteSelecionado;
-	}
-
-	public void setClienteSelecionado(Cliente clienteSelecionado) {
-		this.clienteSelecionado = clienteSelecionado;
-	}
-
-	public Evento getEvento() {
-		return evento;
-	}
-
-	public void setEvento(Evento evento) {
-		this.evento = evento;
-	}
-
-	public ScheduleModel getEventoModel() {
-		return eventoModel;
-	}
-
-	public void setEventoModel(ScheduleModel eventoModel) {
-		this.eventoModel = eventoModel;
-	}
-
-	public List<Evento> getListaEventos() {
-		return listaEventos;
-	}
-
-	public void setListaEventos(List<Evento> listaEventos) {
-		this.listaEventos = listaEventos;
-	}
-
-	public EventoDao getEventoDao() {
-		return eventoDao;
-	}
-
-	public void setEventoDao(EventoDao eventoDao) {
-		this.eventoDao = eventoDao;
-	}
+	private boolean dataCorreta = false;
 
 	@PostConstruct
 	public void inicializar(){
@@ -175,11 +118,12 @@ public class EventoBean implements Serializable {
 						FacesContext.getCurrentInstance().addMessage(null, 
 								new FacesMessage( FacesMessage.SEVERITY_WARN,
 										"Aviso!",
-										"Para criar um evento, primeiro você deve selecionar um cliente!"));
+										"Para criar um evento, selecione um cliente!"));
 						acaoRealizada = false;
 						return;
 					} else {
 						acaoRealizada = true;
+						dataCorreta = true;
 						evento.setCliente(getClienteSelecionado());
 						eventoDao.salvar(evento);
 						setClienteSelecionado(null);
@@ -195,9 +139,11 @@ public class EventoBean implements Serializable {
 				
 			} else {
 				FacesContext .getCurrentInstance() .addMessage(null, 
-						new FacesMessage( FacesMessage.SEVERITY_ERROR,
-								"A data inicial não pode ser maior que a data final!",
+						new FacesMessage( FacesMessage.SEVERITY_WARN,
+								"Aviso!",
 								"A data inicial não pode ser maior que a data final!"));
+				dataCorreta = false;
+				return;
 			}
 		} else {
 			try {
@@ -250,6 +196,70 @@ public class EventoBean implements Serializable {
 				break;
 			}
 		}
-	}  
+	}
+	
+	public boolean isDataCorreta() {
+		return dataCorreta;
+	}
+
+	public void setDataCorreta(boolean dataCorreta) {
+		this.dataCorreta = dataCorreta;
+	}
+
+	public boolean isAcaoRealizada() {
+		return acaoRealizada;
+	}
+
+	public void setAcaoRealizada(boolean acaoRealizada) {
+		this.acaoRealizada = acaoRealizada;
+	}
+
+	public List<Cliente> getListaClientes() {
+		return listaClientes;
+	}
+
+	public void setListaClientes(List<Cliente> listaClientes) {
+		this.listaClientes = listaClientes;
+	}
+
+	public Cliente getClienteSelecionado() {
+		return clienteSelecionado;
+	}
+
+	public void setClienteSelecionado(Cliente clienteSelecionado) {
+		this.clienteSelecionado = clienteSelecionado;
+	}
+
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
+	public ScheduleModel getEventoModel() {
+		return eventoModel;
+	}
+
+	public void setEventoModel(ScheduleModel eventoModel) {
+		this.eventoModel = eventoModel;
+	}
+
+	public List<Evento> getListaEventos() {
+		return listaEventos;
+	}
+
+	public void setListaEventos(List<Evento> listaEventos) {
+		this.listaEventos = listaEventos;
+	}
+
+	public EventoDao getEventoDao() {
+		return eventoDao;
+	}
+
+	public void setEventoDao(EventoDao eventoDao) {
+		this.eventoDao = eventoDao;
+	}
 	
 }

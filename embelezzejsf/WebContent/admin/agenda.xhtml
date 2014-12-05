@@ -150,7 +150,7 @@ html,body {
 
 					<p:separator />
 					<h:panelGroup id="controleModal">
-						<h:panelGroup rendered="#{eventoBean.acaoRealizada}">
+						<h:panelGroup rendered="#{eventoBean.acaoRealizada and eventoBean.dataCorreta}">
 							<script>
 								PF('caixaDialog').hide();
 							</script>	
